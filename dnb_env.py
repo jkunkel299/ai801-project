@@ -10,8 +10,10 @@ PLAYER_1 = "AI-1"
 PLAYER_2 = "AI-2"
 
 class DotsAndBoxesEnv(gym.Env):
-    def __init__(self, grid_size=(3,3)):
+    def __init__(self, grid_size=(5,5), visualize=True):
         super(DotsAndBoxesEnv, self).__init__
+        self.visualize = visualize
+        
         self.size = grid_size
         self.rows, self.cols = grid_size
         # Create a board representation where edges are stored (this is a square board with grid_size rows and columns)
@@ -30,12 +32,11 @@ class DotsAndBoxesEnv(gym.Env):
         self.cell_size = 80
         self.padding = 20
         self.screen_size = (self.cols * self.cell_size + 2 * self.padding, self.rows * self.cell_size + 2 * self.padding)
-        
-        
-        pygame.init()
-        self.screen = pygame.display.set_mode(self.screen_size)
-        self.screen.fill((255, 255, 255))
-        pygame.display.set_caption("Dots and Boxes")
+        if visualize:
+            pygame.init()
+            self.screen = pygame.display.set_mode(self.screen_size)
+            self.screen.fill((255, 255, 255))
+            pygame.display.set_caption("Dots and Boxes")
 
     def reset(self):
         # reset the board and set the first player
@@ -65,67 +66,72 @@ class DotsAndBoxesEnv(gym.Env):
         down_right = row+1, col+1
         left_by_2 = row, col-2
         right_by_2 = row, col+2
+
+        boxA = None
+        boxB = None
         
         if row % 2 == 0: # horizontal line is drawn this turn
             if row == 0: # if the line is on the far left edge
                 if self.board[down_left] and self.board[down_right] and self.board[down_by_2]:
-                    self.fill_box(row, col-1)
+                    boxA = [row, col-1]
                     reward = 1
                 else:
                     reward = 0
             elif row == self.rows*2: # if the line is on the far right edge
                 if self.board[up_left] and self.board[up_right] and self.board[up_by_2]:
-                    self.fill_box(row-2, col-1)
+                    boxA = [row-2, col-1]
                     reward = 1
                 else:
                     reward = 0
             else:
                 if self.board[up_by_2] and self.board[up_left] and self.board[up_right] and self.board[down_by_2] and self.board[down_left] and self.board[down_right]:
-                    self.fill_box(row-2, col-1)
-                    self.fill_box(row, col-1)
+                    boxA = [row-2, col-1]
+                    boxB = [row, col-1]
                     reward = 2 # two boxes made at once
                 elif self.board[down_by_2] and self.board[down_left] and self.board[down_right]: # box below
-                    self.fill_box(row, col-1)
+                    boxA = [row, col-1]
                     reward = 1
                 elif self.board[up_by_2] and self.board[up_left] and self.board[up_right]: # box above
-                    self.fill_box(row-2, col-1)
+                    boxA = [row-2, col-1]
                     reward = 1
                 else:
                     reward = 0
         else: # vertical line is drawn this turn
             if col == 0: # if the line is on the top edge
                 if self.board[up_right] and self.board[down_right] and self.board[right_by_2]:
-                    self.fill_box(row-1, col)
+                    boxA = [row-1, col]
                     reward = 1
                 else:
                     reward = 0
             elif col == self.cols*2: # if the line is on the bottom edge
                 if self.board[up_left] and self.board[down_left] and self.board[left_by_2]:
-                    self.fill_box(row-1, col-2)
+                    boxA = [row-1, col-2]
                     reward = 1
                 else:
                     reward = 0
             else:
                 if self.board[up_left] and self.board[down_left] and self.board[left_by_2] and self.board[up_right] and self.board[down_right] and self.board[right_by_2]:
-                    self.fill_box(row-1, col)
-                    self.fill_box(row-1, col-2)
+                    boxA = [row-1, col]
+                    boxB = [row-1, col-2]
                     reward = 2 # two boxes made at once
                 elif self.board[up_right] and self.board[down_right] and self.board[right_by_2]: # box right
-                    self.fill_box(row-1, col)
+                    boxA = [row-1, col]
                     reward = 1
                 elif self.board[up_left] and self.board[down_left] and self.board[left_by_2]: # box left
-                    self.fill_box(row-1, col-2)
+                    boxA = [row-1, col-2]
                     reward = 1               
                 else:
                     reward = 0
 
-        return reward
+        return reward, boxA, boxB
         
     def _calculate_reward(self, row, col):
         # Determine if a move results in the completion of a box
         reward = 0
-        reward += self._check_box(row, col)
-        return reward
+        check_box = self._check_box(row, col)
+        boxes_filled = [check_box[1], check_box[2]]
+        reward += check_box[0]
+        return reward, boxes_filled
     
     def get_valid_actions(self):
         available = []
@@ -144,17 +150,18 @@ class DotsAndBoxesEnv(gym.Env):
         self.board[row, col] = self.current_player
 
         # Calculate the reward for the move
-        reward = self._calculate_reward(row, col)
+        reward, boxes_filled = self._calculate_reward(row, col)
+
+        done = np.all(self.board!=0)
 
         # If no box is completed, switch the player. (3 - self.current_player) allows the check to appropriately set player 1 or 2
         self.current_player = 3 - self.current_player if reward == 0 else self.current_player
 
         #return self.board, reward, done, {}
-        return self.board, reward, {}
+        return self.board, reward, boxes_filled, done
 
     def render(self):        
         # pygame rendering for better visualization
-        # self.screen.fill((255, 255, 255))
         p1_line = (0, 0, 255)
         p2_line = (255, 0, 0)
         dot_color = (0, 0, 0)
@@ -183,54 +190,70 @@ class DotsAndBoxesEnv(gym.Env):
                         pygame.draw.line(self.screen, p2_line, (self.padding + x, self.padding + y), (self.padding + x + self.cell_size, self.padding + y), 5)
                     else:
                         pygame.draw.line(self.screen, p2_line, (self.padding + x, self.padding + y), (self.padding + x, self.padding + y + self.cell_size), 5)
-
-        pygame.display.flip()
+                    
+        pygame.display.update()
     
     def fill_box(self, row, col):
         #TODO
-        x = col*self.cell_size/2
-        y = row*self.cell_size/2
-        if row == 2*self.rows:
-            y = 160
-        if col == 2*self.cols:
-            x = 160
+        x = col * self.cell_size / 2
+        y = row * self.cell_size / 2
+        if row == 2 * self.rows:
+            y = (self.rows - 1) * self.cell_size
+        if col == 2 * self.cols:
+            x = (self.cols - 1) * self.cell_size
 
         if self.current_player == 1:
             box_fill = (150, 148, 255) # light blue fill
         else:
             box_fill = (255, 148, 150) # light red fill
         pygame.draw.rect(self.screen, box_fill, (self.padding + x, self.padding + y, self.cell_size, self.cell_size))
-        pygame.display.flip()
+        pygame.display.update()
 
     def close(self):
         pygame.quit()
 
-    def play_game(env):
+    def play_game(env): # add agent, opponent to input params when the AI players are established
         running = True
         while running:
             state = env.reset()
             done = False
             scores = [0, 0]
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                while not done:
-                    env.render()
+            turn = 0
+            if env.visualize:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        running = False
+                    
+            while not done:
+                if env.visualize:
                     pygame.time.delay(200)
-                    # print(f"{PLAYER_1 if env.current_player == 1 else PLAYER_2} is making a move...")
-                    valid_actions = env.get_valid_actions()
-                    if not valid_actions:
-                        done = True
-                        env.render()
-                        scores[env.current_player - 1] += 1
-                        
-                        break
-                    action = random.choice(valid_actions) # random AI agents until real agents are implemented
-                    #next_state, reward, done, _ = env.step(action)    
-                    next_state, reward, _ = env.step(action)      
+                # print(f"{PLAYER_1 if env.current_player == 1 else PLAYER_2} is making a move...")
+                valid_actions = env.get_valid_actions()
+                if not valid_actions:
+                    done = True
+                    scores[env.current_player - 1] += 1
+                    break
+
+                # if turn % 2 == 0:
+                #     action = agent.choose_action(state) # CNN-DQN Agent's turn
+                # else:
+                #     action = random.choice(valid_actions) # random AI agent's turn until real opponent agent is implemented
+                action = random.choice(valid_actions)
+                #next_state, reward, done, _ = env.step(action)    
+                state, reward, boxes_filled, done = env.step(action)      
+                boxA = boxes_filled[0]
+                boxB = boxes_filled[1]
+                scores[env.current_player - 1] += reward
+
+                if env.visualize:
+                    if boxA is not None:
+                        env.fill_box(boxA[0], boxA[1])
+                    if boxB is not None:
+                        env.fill_box(boxB[0], boxB[1])
                     env.render()
-                    scores[env.current_player - 1] += reward
-             
+
+                turn += 1 # alternate turns
+
             # pygame.display.set_caption(f"Game over! Final Score: Player 1 = {scores[0]}, Player 2 = {scores[1]}")
             # if scores[0] > scores[1]:
             #     pygame.display.set_caption("Player 1 wins!")
@@ -249,6 +272,7 @@ class DotsAndBoxesEnv(gym.Env):
             
             return scores
         env.close()
-
-game=DotsAndBoxesEnv()
-game.play_game()
+        
+if __name__ == "__main__":
+    game=DotsAndBoxesEnv(visualize=False)
+    game.play_game()
