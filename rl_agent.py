@@ -1,0 +1,160 @@
+import numpy as np
+import random
+import gymnasium as gym
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import torch.nn.functional as F
+from collections import deque
+from dnb_env import DotsAndBoxesEnv
+
+
+class CNN_DQN(nn.Module):
+    def __init__(self, input_channels, output_dim):
+        super(CNN_DQN, self).__init__()
+        print("Input channels: ",input_channels)
+        # Convolutional layers to extract spatial features of the dots-and-boxes board
+        self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=32, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, stride=1, padding=1)
+
+        # Fully connected layers to map features to Q-values
+        self.fc1 = nn.Linear(128 * 11 * 11, 512) # flatten before passing to dense layer, assuming 5 x 5 board
+            # a 5x5 box board is actually and 11x11 board space, since it includes both dots and edges
+        self.fc2 = nn.Linear(512, output_dim) # output layer for Q-values
+
+    def forward(self, x):
+        # manually unsqueezing x to alleviate runtime errors
+        if x.dim() == 3:
+            x = x.unsqueeze(1)
+        
+        #print("before convolutional layers x = ",x.shape)
+        x = F.relu(self.conv1(x)) # First convolutional layer + ReLU activation
+        #print("after conv1 x = ",x.shape)
+        x = F.relu(self.conv2(x)) # Second convolutional layer + ReLU activation
+        #print("after conv2 x = ",x.shape)
+        x = F.relu(self.conv3(x)) # Third convolutional layer + ReLU activation
+        #print("after conv3 x = ",x.shape)
+        
+        x = x.view(x.size(0), -1) # flatten feature maps before feeding into fully connected layer
+        #print("after flattening x = ",x.shape)
+        x = F.relu(self.fc1(x)) # fully connected layer with ReLU activation
+        x = self.fc2(x) # output Q-values for all actions
+
+        return x
+    
+class DQNAgent:
+    def __init__(self, env):
+        self.env = env
+        input_channels = 1
+        output_dim = env.action_space.n
+
+        self.model = CNN_DQN(input_channels, output_dim)
+        self.target_model = CNN_DQN(input_channels, output_dim)
+        self.target_model.load_state_dict(self.model.state_dict())
+        self.target_model.eval()
+
+        self.optimizer = optim.Adam(self.model.parameters(), lr=0.001)
+        self.memory = deque(maxlen=10000)
+        self.epsilon = 1.0
+        self.epsilon_min = 0.01
+        self.epsilon_decay = 0.995
+        self.batch_size = 64
+        self.gamma = 0.99
+
+    def get_state(self, board):
+        """Convert board state to sensor format for convolutional neural network"""
+        return torch.tensor(board[np.newaxis, :, :], dtype=torch.float32) # Shape: (1, height, width)
+
+    def choose_action(self, state):
+        """Epsilon-greedy action selection"""
+        if np.random.rand() < self.epsilon:
+            return self.env.action_space.sample() # explore
+        
+        state_tensor = torch.tensor(state[np.newaxis, np.newaxis, :, :], dtype=torch.float32)
+        with torch.no_grad():
+            q_values = self.model(state_tensor) # predict Q-values
+            return torch.argmax(q_values).item() # choose best action
+        
+    def store_experience(self, state, action, reward, next_state, done):
+        """Store experience tuple in memory"""
+        self.memory.append((state, action, reward, next_state, done))
+
+    def train(self):
+        """Train the CNN-DQN using experiences from the replay buffer"""
+        if len(self.memory) < self.batch_size:
+            return # Wait until enough experience is collected
+        
+        batch = random.sample(self.memory, self.batch_size)
+        states, actions, rewards, next_states, dones = zip(*batch)
+
+        states = np.array(states) # convert list to single numpy.ndarray to improve performance
+        actions = np.array(actions) # convert list to single numpy.ndarray to improve performance
+        rewards = np.array(rewards) # convert list to single numpy.ndarray to improve performance
+        next_states = np.array(next_states) # convert list to single numpy.ndarray to improve performance
+        dones = np.array(dones) # convert list to single numpy.ndarray to improve performance
+
+        # convert to tensors and reshape for CNN
+        states_tensor = torch.tensor(states, dtype=torch.float32).unsqueeze(1)
+        actions_tensor = torch.tensor(actions, dtype=torch.float32).unsqueeze(1)
+        rewards_tensor = torch.tensor(rewards, dtype=torch.float32).unsqueeze(1)
+        next_states_tensor = torch.tensor(next_states, dtype=torch.float32)
+        dones_tensor = torch.tensor(dones, dtype=torch.float32)
+
+        # get current Q-values
+        q_values = self.model(states_tensor).gather(1, actions_tensor.long()).squeeze(1)
+
+        # get target Q-values using the target network
+        with torch.no_grad():
+            next_q_values = self.target_model(next_states_tensor).max(1)[0]
+            target_q_values = rewards_tensor + (self.gamma * next_q_values * (1 - dones_tensor))
+        
+        # compute loss and backpropagate
+        loss = F.mse_loss(q_values, target_q_values)
+        self.optimizer.zero_grad()
+        loss.backward()
+        self.optimizer.step()
+
+        # epsilon decay for exploration-exploitation balance
+        self.decay_epsilon()
+
+    def update_target_network(self):
+        """Update the target network weights to match the main model"""
+        self.target_model.load_state_dict(self.model.state_dict())
+
+    def decay_epsilon(self):
+        """Decay the epsilon value for epsilon-greedy action selection"""
+        if self.epsilon > self.epsilon_min:
+            self.epsilon *= self.epsilon_decay
+
+    def train_agent(self, num_episodes = 1000):
+        """Train the convolutional neural network DQN agent on the Dots and Boxes game"""
+        for episode in range(num_episodes):
+            state = self.env.reset()
+            done = False
+
+            while not done:
+                action = self.choose_action(state)
+                next_state, reward, _, done = self.env.step(action)
+
+                self.store_experience(state, action, reward, next_state, done)
+                self.train()
+
+                state = next_state
+                #print("action: ",action)
+
+            # update the target network periodically
+            if episode % 10 == 0:
+                self.update_target_network()
+
+            # Decay epsilon for better exploitation over time
+            self.decay_epsilon()
+            if episode % 100 == 0:
+                print(f"Episode {episode}: Epsilon = {self.epsilon:.4f}")
+
+# Initialize environment
+env = DotsAndBoxesEnv(visualize=False)
+# Initialize agent
+agent = DQNAgent(env)
+# train agent
+agent.train_agent(num_episodes=5000)
