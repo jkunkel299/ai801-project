@@ -3,6 +3,7 @@ import numpy as np
 import random, time
 import matplotlib.pyplot as plt
 import pygame
+import itertools
 
 spaces = gym.spaces
 
@@ -136,7 +137,7 @@ class DotsAndBoxesEnv(gym.Env):
     def get_valid_actions(self):
         available = []
         moves = self.action_space.n
-        for i in range(moves - 1):
+        for i in range(moves):
             row, col = self._action_to_index(i)
             if self.board[row, col]==0:
                 available.append(i)
@@ -152,7 +153,11 @@ class DotsAndBoxesEnv(gym.Env):
         # Calculate the reward for the move
         reward, boxes_filled = self._calculate_reward(row, col)
 
-        done = np.all(self.board!=0)
+        board_state = self.board.tolist()
+        #f = [i for s in l for i in s]
+        board_state_no_zero = [x for s in board_state for x in s if x != 0]
+        done = not all(board_state_no_zero)
+        #done = np.all(self.board!=0)
 
         # If no box is completed, switch the player. (3 - self.current_player) allows the check to appropriately set player 1 or 2
         self.current_player = 3 - self.current_player if reward == 0 else self.current_player
@@ -214,15 +219,16 @@ class DotsAndBoxesEnv(gym.Env):
 
     def play_game(env): # add agent, opponent to input params when the AI players are established
         running = True
+        done = False
         while running:
             state = env.reset()
-            done = False
+            #done = False
             scores = [0, 0]
             turn = 0
-            if env.visualize:
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        running = False
+            # if env.visualize:
+            #     for event in pygame.event.get():
+            #         if event.type == pygame.QUIT:
+            #             running = False
                     
             while not done:
                 if env.visualize:
@@ -231,9 +237,8 @@ class DotsAndBoxesEnv(gym.Env):
                 valid_actions = env.get_valid_actions()
                 if not valid_actions:
                     done = True
-                    scores[env.current_player - 1] += 1
                     break
-
+                
                 # if turn % 2 == 0:
                 #     action = agent.choose_action(state) # CNN-DQN Agent's turn
                 # else:
@@ -253,7 +258,8 @@ class DotsAndBoxesEnv(gym.Env):
                     env.render()
 
                 turn += 1 # alternate turns
-
+                
+                print("done: ",done)
             # pygame.display.set_caption(f"Game over! Final Score: Player 1 = {scores[0]}, Player 2 = {scores[1]}")
             # if scores[0] > scores[1]:
             #     pygame.display.set_caption("Player 1 wins!")
@@ -261,7 +267,7 @@ class DotsAndBoxesEnv(gym.Env):
             #     pygame.display.set_caption("Player 2 wins!")
             # elif scores[0] == scores[1]:
             #     pygame.display.set_caption("It's a draw!")
-
+            print("done: ",done)
             print(f"Game over! Final Score: Player 1 = {scores[0]}, Player 2 = {scores[1]}")
             if scores[0] > scores[1]:
                 print("Player 1 wins!")
@@ -269,10 +275,10 @@ class DotsAndBoxesEnv(gym.Env):
                 print("Player 2 wins!")
             elif scores[0] == scores[1]:
                 print("It's a draw!")
-            
+            print(env.board)
             return scores
         env.close()
         
 if __name__ == "__main__":
-    game=DotsAndBoxesEnv(visualize=False)
+    game=DotsAndBoxesEnv(visualize=True)
     game.play_game()

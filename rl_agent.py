@@ -6,13 +6,14 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 from collections import deque
+import matplotlib.pyplot as plt
 from dnb_env import DotsAndBoxesEnv
 
 
 class CNN_DQN(nn.Module):
     def __init__(self, input_channels, output_dim):
         super(CNN_DQN, self).__init__()
-        print("Input channels: ",input_channels)
+        #print("Input channels: ",input_channels)
         # Convolutional layers to extract spatial features of the dots-and-boxes board
         self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=32, kernel_size=3, stride=1, padding=1)
         self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
@@ -49,6 +50,10 @@ class DQNAgent:
         input_channels = 1
         output_dim = env.action_space.n
 
+        # visualization
+        self.q_value_history = []
+        self.reward_history = []
+
         self.model = CNN_DQN(input_channels, output_dim)
         self.target_model = CNN_DQN(input_channels, output_dim)
         self.target_model.load_state_dict(self.model.state_dict())
@@ -68,13 +73,21 @@ class DQNAgent:
 
     def choose_action(self, state):
         """Epsilon-greedy action selection"""
-        if np.random.rand() < self.epsilon:
-            return self.env.action_space.sample() # explore
-        
         state_tensor = torch.tensor(state[np.newaxis, np.newaxis, :, :], dtype=torch.float32)
-        with torch.no_grad():
-            q_values = self.model(state_tensor) # predict Q-values
-            return torch.argmax(q_values).item() # choose best action
+        valid_actions = env.get_valid_actions()
+        if np.random.rand() < self.epsilon:
+            action = random.choice(valid_actions)
+        else:      
+            # Exploitation: Choose the best action from available actions    
+            with torch.no_grad():
+                q_values = self.model(state_tensor).squeeze(0) # predict Q-values
+                q_values = q_values.cpu().numpy()# Convert to NumPy for indexing
+
+                # Select the best action from valid actions
+                valid_q_values = {a: q_values[a] for a in valid_actions} # Filter by available actions
+                action = max(valid_q_values, key=valid_q_values.get)# Choose action with highest Q-value
+                #action = torch.argmax(q_values).item() # choose best action
+        return action
         
     def store_experience(self, state, action, reward, next_state, done):
         """Store experience tuple in memory"""
@@ -82,7 +95,10 @@ class DQNAgent:
 
     def train(self):
         """Train the CNN-DQN using experiences from the replay buffer"""
+        # print("In self.train")
         if len(self.memory) < self.batch_size:
+            self.decay_epsilon()
+            # print("epsilon: ",self.epsilon)
             return # Wait until enough experience is collected
         
         batch = random.sample(self.memory, self.batch_size)
@@ -103,7 +119,7 @@ class DQNAgent:
 
         # get current Q-values
         q_values = self.model(states_tensor).gather(1, actions_tensor.long()).squeeze(1)
-
+        #print("q_values: ",q_values)
         # get target Q-values using the target network
         with torch.no_grad():
             next_q_values = self.target_model(next_states_tensor).max(1)[0]
@@ -114,7 +130,7 @@ class DQNAgent:
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
-
+        # print("epsilon: ", self.epsilon)
         # epsilon decay for exploration-exploitation balance
         self.decay_epsilon()
 
@@ -132,17 +148,34 @@ class DQNAgent:
         for episode in range(num_episodes):
             state = self.env.reset()
             done = False
+            valid_actions = True
+            total_q = 0
+            moves = 0
+            total_reward = 0
 
             while not done:
+                valid_actions = self.env.get_valid_actions()
+                if not valid_actions:
+                    break
                 action = self.choose_action(state)
                 next_state, reward, _, done = self.env.step(action)
+
+                total_reward += reward
+
+                q_values = self.model(torch.tensor(state, dtype=torch.float32).unsqueeze(0))
+                total_q += q_values.max().item()
+                moves += 1
 
                 self.store_experience(state, action, reward, next_state, done)
                 self.train()
 
                 state = next_state
-                #print("action: ",action)
 
+            self.reward_history.append(total_reward)
+
+            avg_q_val = total_q / moves if moves > 0 else 0
+            self.q_value_history.append(avg_q_val)
+            # print("Episode: ",episode)
             # update the target network periodically
             if episode % 10 == 0:
                 self.update_target_network()
@@ -151,10 +184,27 @@ class DQNAgent:
             self.decay_epsilon()
             if episode % 100 == 0:
                 print(f"Episode {episode}: Epsilon = {self.epsilon:.4f}")
+            #print(f"Episode {episode}: Epsilon = {self.epsilon:.4f}")
+        self.plot_q_values()
+        # self.plot_rewards()
+
+    # def plot_rewards(self):
+    #     plt.plot(self.reward_history)
+    #     plt.xlabel("Episode")
+    #     plt.ylabel("Total Reward")
+    #     plt.title("Training Reward Progression")
+    #     plt.show()
+
+    def plot_q_values(self):
+        plt.plot(self.q_value_history)
+        plt.xlabel("Episode")
+        plt.ylabel("Average Q-Value")
+        plt.title("Q-Value Progression During Training")
+        plt.show()
 
 # Initialize environment
 env = DotsAndBoxesEnv(visualize=False)
 # Initialize agent
 agent = DQNAgent(env)
 # train agent
-agent.train_agent(num_episodes=5000)
+agent.train_agent(num_episodes=10)
