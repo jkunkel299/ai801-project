@@ -199,7 +199,6 @@ class DotsAndBoxesEnv(gym.Env):
         pygame.display.update()
     
     def fill_box(self, row, col):
-        #TODO
         x = col * self.cell_size / 2
         y = row * self.cell_size / 2
         if row == 2 * self.rows:
@@ -217,33 +216,42 @@ class DotsAndBoxesEnv(gym.Env):
     def close(self):
         pygame.quit()
 
-    def play_game(env): # add agent, opponent to input params when the AI players are established
+    def play_game(env, player1='random_moves', player2='random_moves'): # add agent, opponent to input params when the AI players are established
         running = True
         done = False
         while running:
             state = env.reset()
             #done = False
             scores = [0, 0]
-            turn = 0
-            # if env.visualize:
-            #     for event in pygame.event.get():
-            #         if event.type == pygame.QUIT:
-            #             running = False
+            turn = 0  
+            players = [player1, player2]         
                     
             while not done:
                 if env.visualize:
                     pygame.time.delay(200)
                 # print(f"{PLAYER_1 if env.current_player == 1 else PLAYER_2} is making a move...")
-                valid_actions = env.get_valid_actions()
+                valid_actions = env.get_valid_actions()             
+
                 if not valid_actions:
                     done = True
                     break
-                
-                # if turn % 2 == 0:
-                #     action = agent.choose_action(state) # CNN-DQN Agent's turn
-                # else:
-                #     action = random.choice(valid_actions) # random AI agent's turn until real opponent agent is implemented
-                action = random.choice(valid_actions)
+                # logic for implementing two-player gameplay. Each AI or human player required to have choose_action method (for now?)
+                if turn % 2 == 0:
+                    if player1 != 'random_moves':
+                        #print("player1 online")
+                        player1_action = player1.choose_action(state)
+                    elif player1 == 'random_moves':
+                        player1_action = random.choice(valid_actions)
+                    action = player1_action # CNN-DQN Agent's turn
+                else:
+                    if player2 != 'random_moves':
+                        #print("player2 online")
+                        player2_action = player2.choose_action(state)
+                    elif player2 == 'random_moves':
+                        player2_action = random.choice(valid_actions)
+                    action = player2_action # random AI agent's turn until real opponent agent is implemented
+                #action = random.choice(valid_actions)
+                # print("valid actions: ",valid_actions)
                 #next_state, reward, done, _ = env.step(action)    
                 state, reward, boxes_filled, done = env.step(action)      
                 boxA = boxes_filled[0]
@@ -258,8 +266,9 @@ class DotsAndBoxesEnv(gym.Env):
                     env.render()
 
                 turn += 1 # alternate turns
+                # print("turn: ", turn)
                 
-                print("done: ",done)
+                # print("done: ",done)
             # pygame.display.set_caption(f"Game over! Final Score: Player 1 = {scores[0]}, Player 2 = {scores[1]}")
             # if scores[0] > scores[1]:
             #     pygame.display.set_caption("Player 1 wins!")
@@ -271,12 +280,14 @@ class DotsAndBoxesEnv(gym.Env):
             print(f"Game over! Final Score: Player 1 = {scores[0]}, Player 2 = {scores[1]}")
             if scores[0] > scores[1]:
                 print("Player 1 wins!")
+                winner = player1
             elif scores[0] < scores[1]:
                 print("Player 2 wins!")
+                winner = player2
             elif scores[0] == scores[1]:
                 print("It's a draw!")
-            print(env.board)
-            return scores
+            # print(env.board)
+            return scores, players, winner
         env.close()
         
 if __name__ == "__main__":

@@ -8,13 +8,15 @@ import torch.nn.functional as F
 from collections import deque
 import matplotlib.pyplot as plt
 from dnb_env import DotsAndBoxesEnv
+import pickle
 
 
 class CNN_DQN(nn.Module):
     def __init__(self, input_channels, output_dim):
         super(CNN_DQN, self).__init__()
-        #print("Input channels: ",input_channels)
         # Convolutional layers to extract spatial features of the dots-and-boxes board
+        # each convolutional layer applies a 2D convolution over an inpyt image compsed of input planes
+        # in this case the image will be the dots-and-boxes board
         self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=32, kernel_size=3, stride=1, padding=1)
         self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
         self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, stride=1, padding=1)
@@ -29,16 +31,12 @@ class CNN_DQN(nn.Module):
         if x.dim() == 3:
             x = x.unsqueeze(1)
         
-        #print("before convolutional layers x = ",x.shape)
+        # ReLU activation applies the rectified linear unit function element-wise
         x = F.relu(self.conv1(x)) # First convolutional layer + ReLU activation
-        #print("after conv1 x = ",x.shape)
         x = F.relu(self.conv2(x)) # Second convolutional layer + ReLU activation
-        #print("after conv2 x = ",x.shape)
         x = F.relu(self.conv3(x)) # Third convolutional layer + ReLU activation
-        #print("after conv3 x = ",x.shape)
         
         x = x.view(x.size(0), -1) # flatten feature maps before feeding into fully connected layer
-        #print("after flattening x = ",x.shape)
         x = F.relu(self.fc1(x)) # fully connected layer with ReLU activation
         x = self.fc2(x) # output Q-values for all actions
 
@@ -73,8 +71,10 @@ class DQNAgent:
 
     def choose_action(self, state):
         """Epsilon-greedy action selection"""
-        state_tensor = torch.tensor(state[np.newaxis, np.newaxis, :, :], dtype=torch.float32)
-        valid_actions = env.get_valid_actions()
+        #state_tensor = torch.tensor(state[np.newaxis, np.newaxis, :, :], dtype=torch.float32)
+        state_tensor = self.get_state(self.env.board)
+        valid_actions = self.env.get_valid_actions()
+        # print("valid actions in choose: ", valid_actions)
         if np.random.rand() < self.epsilon:
             action = random.choice(valid_actions)
         else:      
@@ -86,7 +86,7 @@ class DQNAgent:
                 # Select the best action from valid actions
                 valid_q_values = {a: q_values[a] for a in valid_actions} # Filter by available actions
                 action = max(valid_q_values, key=valid_q_values.get)# Choose action with highest Q-value
-                #action = torch.argmax(q_values).item() # choose best action
+        # print("action: ",action)
         return action
         
     def store_experience(self, state, action, reward, next_state, done):
@@ -95,10 +95,8 @@ class DQNAgent:
 
     def train(self):
         """Train the CNN-DQN using experiences from the replay buffer"""
-        # print("In self.train")
         if len(self.memory) < self.batch_size:
             self.decay_epsilon()
-            # print("epsilon: ",self.epsilon)
             return # Wait until enough experience is collected
         
         batch = random.sample(self.memory, self.batch_size)
@@ -119,18 +117,18 @@ class DQNAgent:
 
         # get current Q-values
         q_values = self.model(states_tensor).gather(1, actions_tensor.long()).squeeze(1)
-        #print("q_values: ",q_values)
         # get target Q-values using the target network
         with torch.no_grad():
-            next_q_values = self.target_model(next_states_tensor).max(1)[0]
+            # reshaping next_q_values and dones_tensor to align with the shape of rewards_tensor
+            next_q_values = self.target_model(next_states_tensor).max(1)[0].unsqueeze(1)
+            dones_tensor = dones_tensor.unsqueeze(1)
             target_q_values = rewards_tensor + (self.gamma * next_q_values * (1 - dones_tensor))
         
         # compute loss and backpropagate
-        loss = F.mse_loss(q_values, target_q_values)
+        loss = F.mse_loss(q_values.unsqueeze(1), target_q_values)
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
-        # print("epsilon: ", self.epsilon)
         # epsilon decay for exploration-exploitation balance
         self.decay_epsilon()
 
@@ -143,7 +141,7 @@ class DQNAgent:
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
 
-    def train_agent(self, num_episodes = 1000):
+    def train_agent(self, num_episodes=1000):
         """Train the convolutional neural network DQN agent on the Dots and Boxes game"""
         for episode in range(num_episodes):
             state = self.env.reset()
@@ -155,7 +153,9 @@ class DQNAgent:
 
             while not done:
                 valid_actions = self.env.get_valid_actions()
+                # print(valid_actions)
                 if not valid_actions:
+                    done = True
                     break
                 action = self.choose_action(state)
                 next_state, reward, _, done = self.env.step(action)
@@ -170,12 +170,12 @@ class DQNAgent:
                 self.train()
 
                 state = next_state
+                # print("moves: ", moves)
 
             self.reward_history.append(total_reward)
 
             avg_q_val = total_q / moves if moves > 0 else 0
             self.q_value_history.append(avg_q_val)
-            # print("Episode: ",episode)
             # update the target network periodically
             if episode % 10 == 0:
                 self.update_target_network()
@@ -183,9 +183,10 @@ class DQNAgent:
             # Decay epsilon for better exploitation over time
             self.decay_epsilon()
             if episode % 100 == 0:
-                print(f"Episode {episode}: Epsilon = {self.epsilon:.4f}")
-            #print(f"Episode {episode}: Epsilon = {self.epsilon:.4f}")
-        self.plot_q_values()
+                print(f"Episode {episode+1}: Epsilon = {self.epsilon:.4f}")
+            print("Episode: ", episode+1)
+        print(f"Episode {episode+1}: Epsilon = {self.epsilon:.4f}")
+        #self.plot_q_values()
         # self.plot_rewards()
 
     # def plot_rewards(self):
@@ -202,9 +203,31 @@ class DQNAgent:
         plt.title("Q-Value Progression During Training")
         plt.show()
 
-# Initialize environment
-env = DotsAndBoxesEnv(visualize=False)
-# Initialize agent
-agent = DQNAgent(env)
-# train agent
-agent.train_agent(num_episodes=10)
+    def save_agent(self, path="agent_checkpoint.pth"):
+        """Save entire agent: model, target model, memory, and epsilon
+            For use across instances of gameplay"""
+        torch.save({
+            'model_state_dict': self.model.state_dict(),
+            'target_state_dict': self.target_model.state_dict(),
+            'memory': self.memory,
+            'epsilon': self.epsilon
+        }, path)
+        print(f"[INFO] Checkpoint Agent saved to {path}")
+    
+    def load_agent(self, path="agent_checkpoint.pth"):
+        """Load entire agent: model, target model, memory, and epsilon
+            When using the agent across instances of gameplay"""
+        checkpoint = torch.load(path, weights_only=False)
+        self.model.load_state_dict(checkpoint['model_state_dict'])
+        self.target_model.load_state_dict(checkpoint['target_state_dict'])
+        self.memory = checkpoint['memory']
+        self.epsilon = checkpoint['epsilon']
+        print(f"[INFO] Checkpoint Agent loaded from {path}")
+
+
+# # Initialize environment
+# local_env = DotsAndBoxesEnv(visualize=False)
+# # Initialize agent
+# agent = DQNAgent(local_env)
+# # train agent
+# agent.train_agent(num_episodes=10)
