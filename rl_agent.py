@@ -1,6 +1,5 @@
 import numpy as np
 import random
-import gymnasium as gym
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -8,22 +7,27 @@ import torch.nn.functional as F
 from collections import deque
 import matplotlib.pyplot as plt
 from dnb_env import DotsAndBoxesEnv
-import pickle
 
 
 class CNN_DQN(nn.Module):
+    """Convolutional neural network"""
     def __init__(self, input_channels, output_dim):
         super(CNN_DQN, self).__init__()
-        # Convolutional layers to extract spatial features of the dots-and-boxes board
-        # each convolutional layer applies a 2D convolution over an inpyt image compsed of input planes
-        # in this case the image will be the dots-and-boxes board
-        self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=32, kernel_size=3, stride=1, padding=1)
-        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
-        self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, stride=1, padding=1)
+        '''Convolutional layers to extract spatial features of the dots-and-boxes board
+        each convolutional layer applies a 2D convolution over an inpyt image compsed of input planes
+        in this case the image will be the dots-and-boxes board'''
+        self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=32, 
+                               kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, 
+                               kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, 
+                               kernel_size=3, stride=1, padding=1)
 
         # Fully connected layers to map features to Q-values
-        self.fc1 = nn.Linear(128 * 11 * 11, 512) # flatten before passing to dense layer, assuming 5 x 5 board
-            # a 5x5 box board is actually and 11x11 board space, since it includes both dots and edges
+        # flatten before passing to dense layer, assuming 5 x 5 board
+        self.fc1 = nn.Linear(128 * 11 * 11, 512) 
+        ''' a 5x5 box board is actually and 11x11 board space, 
+            since it includes both dots and edges'''
         self.fc2 = nn.Linear(512, output_dim) # output layer for Q-values
 
     def forward(self, x):
@@ -31,18 +35,21 @@ class CNN_DQN(nn.Module):
         if x.dim() == 3:
             x = x.unsqueeze(1)
         
-        # ReLU activation applies the rectified linear unit function element-wise
+        ''' ReLU activation applies the rectified linear unit function 
+            element-wise'''
         x = F.relu(self.conv1(x)) # First convolutional layer + ReLU activation
-        x = F.relu(self.conv2(x)) # Second convolutional layer + ReLU activation
-        x = F.relu(self.conv3(x)) # Third convolutional layer + ReLU activation
+        x = F.relu(self.conv2(x)) # 2nd convolutional layer + ReLU activation
+        x = F.relu(self.conv3(x)) # 3rd convolutional layer + ReLU activation
         
-        x = x.view(x.size(0), -1) # flatten feature maps before feeding into fully connected layer
+        # flatten feature maps before feeding into fully connected layer
+        x = x.view(x.size(0), -1) 
         x = F.relu(self.fc1(x)) # fully connected layer with ReLU activation
         x = self.fc2(x) # output Q-values for all actions
 
         return x
     
 class DQNAgent:
+    """Deep Q-learning agent for use with convolutional neural network"""
     def __init__(self, env):
         self.env = env
         input_channels = 1
@@ -66,12 +73,13 @@ class DQNAgent:
         self.gamma = 0.99
 
     def get_state(self, board):
-        """Convert board state to sensor format for convolutional neural network"""
-        return torch.tensor(board[np.newaxis, :, :], dtype=torch.float32) # Shape: (1, height, width)
-
+        """Convert board state to sensor format for convolutional neural 
+            network"""
+        # Shape: (1, height, width)
+        return torch.tensor(board[np.newaxis, :, :], dtype=torch.float32) 
+    
     def choose_action(self, state):
         """Epsilon-greedy action selection"""
-        #state_tensor = torch.tensor(state[np.newaxis, np.newaxis, :, :], dtype=torch.float32)
         state_tensor = self.get_state(self.env.board)
         valid_actions = self.env.get_valid_actions()
         # print("valid actions in choose: ", valid_actions)
