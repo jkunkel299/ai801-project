@@ -27,7 +27,8 @@ agent_10000 = DQNAgent(local_env)
 # agent_1000.save_agent("agent_checkpoint_1000_episodes.pth")
 # print(f"Epsilon after 1000 episodes = {agent_1000.epsilon}")
 
+#TODO: train RL agent to 10,000 episodes
 agent_10000.load_agent("agent_checkpoint_1000_episodes.pth")
-agent_10000.train_agent(num_episodes=100) # repeat 9x
+agent_10000.train_agent(num_episodes=1000) # repeat 9x
 agent_10000.save_agent("agent_checkpoint_10000_episodes.pth")
 print(f"Epsilon after 1000 episodes = {agent_10000.epsilon}")

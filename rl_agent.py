@@ -78,7 +78,7 @@ class DQNAgent:
         # Shape: (1, height, width)
         return torch.tensor(board[np.newaxis, :, :], dtype=torch.float32) 
     
-    def choose_action(self, state):
+    def choose_action(self):
         """Epsilon-greedy action selection"""
         state_tensor = self.get_state(self.env.board)
         valid_actions = self.env.get_valid_actions()

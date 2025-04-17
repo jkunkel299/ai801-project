@@ -216,10 +216,12 @@ class DotsAndBoxesEnv(gym.Env):
         board_state = self.board.tolist()
         board_state_no_zero = [x for s in board_state for x in s if x != 0]
         done = not all(board_state_no_zero)
-
-        # If no box is completed, switch the player. (3 - self.current_player) 
-        # allows the check to appropriately set player 1 or 2
-        self.current_player = 3 - self.current_player if reward == 0 else self.current_player
+        
+        '''If no box is completed, switch the player. 
+        (3 - self.current_player) allows the check to appropriately set player
+        1 or 2'''
+        self.current_player = (3 - self.current_player 
+                               if reward == 0 else self.current_player)
 
         return self.board, reward, boxes_filled, done
 
@@ -314,8 +316,8 @@ class DotsAndBoxesEnv(gym.Env):
                     
             while not done:
                 if env.visualize:
+                    pygame.event.pump()
                     pygame.time.delay(200)
-                # print(f"{PLAYER_1 if env.current_player == 1 else PLAYER_2} is making a move...")
                 valid_actions = env.get_valid_actions()             
 
                 if not valid_actions:
@@ -326,13 +328,13 @@ class DotsAndBoxesEnv(gym.Env):
                    that is called by the gameplay logic.'''
                 if turn % 2 == 0:
                     if player1 != 'random_moves':
-                        player1_action = player1.choose_action(state)
+                        player1_action = player1.choose_action()
                     elif player1 == 'random_moves':
                         player1_action = random.choice(valid_actions)
                     action = player1_action # Player 1's turn
                 else:
                     if player2 != 'random_moves':
-                        player2_action = player2.choose_action(state)
+                        player2_action = player2.choose_action()
                     elif player2 == 'random_moves':
                         player2_action = random.choice(valid_actions)
                     action = player2_action # Player 2's turn
