@@ -373,7 +373,7 @@ class DotsAndBoxesEnv(gym.Env):
                 print("It's a draw!")
             return scores, players, winner
         env.close()
-        
+
 if __name__ == "__main__":
     game=DotsAndBoxesEnv(visualize=True)
     game.play_game()

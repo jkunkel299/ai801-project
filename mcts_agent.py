@@ -3,6 +3,142 @@ import random
 import math
 from dnb_env import DotsAndBoxesEnv
 
+#TODO implement static game state to allow MCTS simulations without disrupting the DNB environment
+class GameState:
+    def __init__(self, board, rows, cols, current_player):
+        self.board = np.copy(board)
+        self.rows = rows
+        self.cols = cols
+        self.current_player = current_player
+
+    def get_valid_actions(self):
+        #return [i for i in range(self.board.size) if self.board.flat[i] == 0]
+        available = []
+        moves = ((self.rows + 1) * self.cols + 
+                 (self.cols + 1) * self.rows)
+        for i in range(moves):
+            row, col = self._action_to_index(i)
+            if self.board[row, col]==0:
+                available.append(i)
+        return available
+    
+    def step(self, action):
+        row, col = np.unravel_index(action, self.board.shape)
+        self.board[row, col] = self.current_player
+        reward, _, _ = self._check_box_static(row, col)
+        done = np.all(self.board != 0)
+        if reward == 0:
+            self.current_player = 3 - self.current_player
+        return self.board, reward, self.current_player, done
+    
+    def _action_to_index(self, action):
+        """Convert the action number (which edge is selected for a move) to 
+        board row and column coordinates"""
+        total_horizontal_edges = self.rows * (self.cols + 1)
+        if action < total_horizontal_edges:
+            row = (action // self.cols) * 2
+            col = (action % self.cols) * 2 + 1
+        else:
+            action -= total_horizontal_edges
+            row = (action // (self.cols + 1)) * 2 + 1
+            col = (action % (self.cols + 1)) * 2
+        return row, col
+    
+    def _check_box_static(self, row, col):
+        """determine if a box is made with the current move
+        Inputs are the row and column position of the action taken,
+        outputs are the reward (increase in score) and the box(es) made by the 
+        move"""
+        # initialize variables to describe edges relative to current position
+        up_by_2 = row-2, col
+        down_by_2 = row+2, col
+        up_left = row-1, col-1
+        up_right = row-1,col+1
+        down_left = row+1, col-1
+        down_right = row+1, col+1
+        left_by_2 = row, col-2
+        right_by_2 = row, col+2
+
+        boxA = None
+        boxB = None
+        
+        if row % 2 == 0: # horizontal line is drawn this turn
+            if row == 0: # if the line is on the far left edge
+                if (self.board[down_left] and self.board[down_right] 
+                    and self.board[down_by_2]):
+                    # box below
+                    boxA = [row, col-1]
+                    reward = 1
+                else:
+                    reward = 0
+            elif row == self.rows*2: # if the line is on the far right edge
+                if (self.board[up_left] and self.board[up_right] 
+                    and self.board[up_by_2]):
+                    # box above
+                    boxA = [row-2, col-1]
+                    reward = 1
+                else:
+                    reward = 0
+            else:
+                if (self.board[up_by_2] and self.board[up_left] 
+                    and self.board[up_right] and self.board[down_by_2] 
+                    and self.board[down_left] and self.board[down_right]):
+                    # box above and below
+                    boxA = [row-2, col-1]
+                    boxB = [row, col-1]
+                    reward = 2 # two boxes made at once
+                elif (self.board[down_by_2] and self.board[down_left] 
+                      and self.board[down_right]): 
+                    # box below
+                    boxA = [row, col-1]
+                    reward = 1
+                elif (self.board[up_by_2] and self.board[up_left] 
+                      and self.board[up_right]): 
+                    # box above
+                    boxA = [row-2, col-1]
+                    reward = 1
+                else:
+                    reward = 0
+        else: # vertical line is drawn this turn
+            if col == 0: # if the line is on the top edge
+                if (self.board[up_right] and self.board[down_right] 
+                    and self.board[right_by_2]):
+                    # box to the right
+                    boxA = [row-1, col]
+                    reward = 1
+                else:
+                    reward = 0
+            elif col == self.cols*2: # if the line is on the bottom edge
+                if (self.board[up_left] and self.board[down_left] 
+                    and self.board[left_by_2]):
+                    # box to the left
+                    boxA = [row-1, col-2]
+                    reward = 1
+                else:
+                    reward = 0
+            else:
+                if (self.board[up_left] and self.board[down_left] 
+                    and self.board[left_by_2] and self.board[up_right] 
+                    and self.board[down_right] and self.board[right_by_2]):
+                    # box to the left and right
+                    boxA = [row-1, col]
+                    boxB = [row-1, col-2]
+                    reward = 2 # two boxes made at once
+                elif (self.board[up_right] and self.board[down_right] 
+                      and self.board[right_by_2]): 
+                    # box right
+                    boxA = [row-1, col]
+                    reward = 1
+                elif (self.board[up_left] and self.board[down_left] 
+                      and self.board[left_by_2]): 
+                    # box left
+                    boxA = [row-1, col-2]
+                    reward = 1               
+                else:
+                    reward = 0
+
+        return reward, boxA, boxB
+
 # ==== MCTS Tree Node Class ====
 # Represents a node in the Monte Carlo Tree used for MCTS (Monte Carlo Tree Search).
 # Each node tracks its parent, children, visit count, total value, and the action that led to it.
@@ -61,38 +197,42 @@ class MCTSAgent:
 
     def choose_action(self):
         root = TreeNode()
+        max_siumulation_depth = 10
         valid_actions = self.env.get_valid_actions()
         if not valid_actions:
             return None
 
         # Run multiple simulations
         for _ in range(self.simulations):
-            sim_env = self.copy_env(self.env)
+            sim_state = GameState(self.env.board, self.env.rows, self.env.cols, self.env.current_player)
             node = root
 
             # Selection: traverse the tree until a leaf or terminal state
-            while node.is_fully_expanded(sim_env.get_valid_actions()) and node.children:
+            while node.is_fully_expanded(sim_state.get_valid_actions()) and node.children:
                 node = node.best_child()
-                _, _, _, done = sim_env.step(node.action)
+                _, _, _, done = sim_state.step(node.action)
                 if done:
                     break
 
-            if not sim_env.get_valid_actions():
+            if not sim_state.get_valid_actions():
                 continue
 
-            if not node.is_fully_expanded(sim_env.get_valid_actions()):
-                node = node.expand(sim_env, sim_env.get_valid_actions())
-                _, reward, _, done = sim_env.step(node.action)
+            if not node.is_fully_expanded(sim_state.get_valid_actions()):
+                node = node.expand(sim_state, sim_state.get_valid_actions())
+                _, reward, _, done = sim_state.step(node.action)
             else:
                 reward = 0
 
             # Simulation: rollout using a heuristic policy
-            while not done:
-                possible_actions = sim_env.get_valid_actions()
+            for _ in range(max_siumulation_depth): 
+                ''' max_siumulation_depth implemented to improve performance, 
+                rather than playing simulations through to the end of the 
+                game'''
+                possible_actions = sim_state.get_valid_actions()
                 if not possible_actions:
                     break
-                sim_action = self.heuristic_policy(possible_actions, sim_env)
-                _, sim_reward, _, done = sim_env.step(sim_action)
+                sim_action = self.heuristic_policy(possible_actions, sim_state)
+                _, sim_reward, _, done = sim_state.step(sim_action)
                 reward += sim_reward
 
             node.backpropagate(reward)
@@ -112,7 +252,7 @@ class MCTSAgent:
         best_actions = []
         for action in actions:
             row, col = env._action_to_index(action)
-            reward, _, _ = env._check_box(row, col)
+            reward, _, _ = env._check_box_static(row, col)
             if reward > 0:
                 best_actions.append(action)
 
@@ -134,7 +274,7 @@ class MCTSAgent:
                     r, c = row + dr, col + dc
                     if 0 <= r < env.board.shape[0] and 0 <= c < env.board.shape[1]:
                         if env.board[r, c] == 0:
-                            _, box_posA, box_posB = env._check_box(r, c)
+                            _, box_posA, box_posB = env._check_box_static(r, c)
                             if box_posA or box_posB:
                                 risky = True
             env.board[row, col] = original_value  # Restore
@@ -143,6 +283,8 @@ class MCTSAgent:
                 safe_actions.append(action)
 
         return random.choice(safe_actions) if safe_actions else random.choice(actions)
+    
+    
         
     # Creates and returns a deep copy of the given DotsAndBoxesEnv environment.
     # This is useful for simulations (during MCTS) where we want to explore future states
@@ -153,3 +295,7 @@ class MCTSAgent:
         new_env.board = np.copy(env.board)
         new_env.current_player = env.current_player
         return new_env
+''''''
+
+
+

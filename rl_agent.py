@@ -67,7 +67,7 @@ class DQNAgent:
         self.optimizer = optim.Adam(self.model.parameters(), lr=0.001)
         self.memory = deque(maxlen=10000)
         self.epsilon = 1.0
-        self.epsilon_min = 0.01
+        self.epsilon_min = 0.0001
         self.epsilon_decay = 0.995
         self.batch_size = 64
         self.gamma = 0.99
@@ -165,7 +165,7 @@ class DQNAgent:
                 if not valid_actions:
                     done = True
                     break
-                action = self.choose_action(state)
+                action = self.choose_action()
                 next_state, reward, _, done = self.env.step(action)
 
                 total_reward += reward
