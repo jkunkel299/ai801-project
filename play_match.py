@@ -6,8 +6,8 @@ from mcts_agent import MCTSAgent
 # Initialize environment
 game = DotsAndBoxesEnv(visualize=True)
 
-# rl_agent_1000 = DQNAgent(env=game)
-# rl_agent_1000.load_agent(path="agent_checkpoint_1000_episodes.pth")
+rl_agent_1000 = DQNAgent(env=game)
+rl_agent_1000.load_agent(path="agent_checkpoint_1000_episodes.pth")
 
 human_player = Human(env=game)
 

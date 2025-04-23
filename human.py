@@ -3,7 +3,7 @@ import pygame
 class Human():
     def __init__(self, env):
         self.env = env
-    # Human mouse click action index
+
     def mouse_click_to_action(self, pos):
         """
         Converts a mouse click position into a valid game action.
@@ -15,7 +15,8 @@ class Human():
         env (DotsAndBoxesEnv): The current game environment instance.
 
         Returns:
-        int or None: The action index if the click maps to a valid edge, otherwise None.
+        int or None: The action index if the click maps to a valid edge, 
+        otherwise None.
         """
 
         x, y = pos
@@ -31,10 +32,12 @@ class Human():
         row = round(row_pos)
         col = round(col_pos)
 
-        if row < 0 or col < 0 or row >= self.env.board.shape[0] or col >= self.env.board.shape[1]:
+        if (row < 0 or col < 0 or row >= self.env.board.shape[0] 
+            or col >= self.env.board.shape[1]):
             return None
 
-        if (row % 2 == 0 and col % 2 == 1) or (row % 2 == 1 and col % 2 == 0):
+        if ((row % 2 == 0 and col % 2 == 1) 
+            or (row % 2 == 1 and col % 2 == 0)):
             for action in self.env.get_valid_actions():
                 try:
                     r, c = self.env._action_to_index(action)
@@ -48,12 +51,13 @@ class Human():
         waiting_for_input = True
         while waiting_for_input:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                    self.close()
-                    return
+                # if event.type == pygame.QUIT:
+                #     pygame.quit()
+                #     return
+                
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     pos = pygame.mouse.get_pos()
                     action = self.mouse_click_to_action(pos)
-                    if action is not None and action in self.env.get_valid_actions():
+                    if (action and action in 
+                        self.env.get_valid_actions()):
                         return action

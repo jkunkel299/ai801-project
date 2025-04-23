@@ -1,9 +1,9 @@
 import gymnasium as gym
 import numpy as np
-import random, time
+import random
 import matplotlib.pyplot as plt
 import pygame
-import itertools
+import sys
 
 spaces = gym.spaces
 
@@ -63,6 +63,9 @@ class DotsAndBoxesEnv(gym.Env):
         """reset the board and set the first player"""
         self.board.fill(0)
         self.current_player = 1
+        if self.visualize:
+            self.screen.fill((255, 255, 255))
+            self.render()
         return self.board
     
     def _action_to_index(self, action):
@@ -190,7 +193,7 @@ class DotsAndBoxesEnv(gym.Env):
         edges that are already occupied)"""
         available = []
         moves = self.action_space.n
-        for i in range(moves):
+        for i in range(0,moves):
             row, col = self._action_to_index(i)
             if self.board[row, col]==0:
                 available.append(i)
@@ -220,8 +223,7 @@ class DotsAndBoxesEnv(gym.Env):
         '''If no box is completed, switch the player. 
         (3 - self.current_player) allows the check to appropriately set player
         1 or 2'''
-        self.current_player = (3 - self.current_player 
-                               if reward == 0 else self.current_player)
+        self.current_player = 3 - self.current_player if reward == 0 else self.current_player
 
         return self.board, reward, boxes_filled, done
 
@@ -295,6 +297,7 @@ class DotsAndBoxesEnv(gym.Env):
     def close(self):
         # close the pygame display
         pygame.quit()
+        sys.exit()
 
     def play_game(env, player1='random_moves', player2='random_moves'):
         """Logic to play the dots and boxes game.
@@ -309,28 +312,37 @@ class DotsAndBoxesEnv(gym.Env):
         done = False
         while running:
             # initialize gameplay variables for state, score, turn
-            state = env.reset()
+            #state = env.reset()
             scores = [0, 0]
             turn = 0  
             players = [player1, player2]         
-                    
+            
             while not done:
                 if env.visualize:
+                    env.render()
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            running = False
+                            env.close()
                     pygame.event.pump()
-                    pygame.time.delay(200)
+                    pygame.time.delay(500)        
                 valid_actions = env.get_valid_actions()             
+                
+                if not running:
+                    break
 
                 if not valid_actions:
-                    done = True
+                    #done = True
                     break
                 '''logic for implementing two-player gameplay. 
                    Each AI or human player required to have choose_action method 
                    that is called by the gameplay logic.'''
-                if turn % 2 == 0:
+                if env.current_player % 2 != 0:
                     if player1 != 'random_moves':
                         player1_action = player1.choose_action()
                     elif player1 == 'random_moves':
-                        player1_action = random.choice(valid_actions)
+                        player1_action = 0 if turn == 0 else random.choice(valid_actions)
+                        #player1_action = random.choice(valid_actions)
                     action = player1_action # Player 1's turn
                 else:
                     if player2 != 'random_moves':
@@ -339,21 +351,22 @@ class DotsAndBoxesEnv(gym.Env):
                         player2_action = random.choice(valid_actions)
                     action = player2_action # Player 2's turn
 
-                state, reward, boxes_filled, done = env.step(action)      
+                # if action:
+                _, reward, boxes_filled, done = env.step(action)      
                 boxA = boxes_filled[0]
                 boxB = boxes_filled[1]
                 scores[env.current_player - 1] += reward
 
                 '''only call fill_box if visualization is True for the game 
-                   environment'''
+                environment'''
                 if env.visualize:
                     if boxA is not None:
                         env.fill_box(boxA[0], boxA[1])
                     if boxB is not None:
                         env.fill_box(boxB[0], boxB[1])
                     env.render()
-
                 turn += 1 # alternate turns
+                
             #TODO refine gameplay visualization of scores in pygame
             # pygame.display.set_caption(f"Game over! Final Score: Player 1 = {scores[0]}, Player 2 = {scores[1]}")
             # if scores[0] > scores[1]:

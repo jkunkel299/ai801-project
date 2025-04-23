@@ -3,7 +3,6 @@ import random
 import math
 from dnb_env import DotsAndBoxesEnv
 
-#TODO implement static game state to allow MCTS simulations without disrupting the DNB environment
 class GameState:
     def __init__(self, board, rows, cols, current_player):
         self.board = np.copy(board)
@@ -12,7 +11,6 @@ class GameState:
         self.current_player = current_player
 
     def get_valid_actions(self):
-        #return [i for i in range(self.board.size) if self.board.flat[i] == 0]
         available = []
         moves = ((self.rows + 1) * self.cols + 
                  (self.cols + 1) * self.rows)
@@ -23,7 +21,7 @@ class GameState:
         return available
     
     def step(self, action):
-        row, col = np.unravel_index(action, self.board.shape)
+        row, col = self._action_to_index(action)
         self.board[row, col] = self.current_player
         reward, _, _ = self._check_box_static(row, col)
         done = np.all(self.board != 0)
@@ -139,58 +137,72 @@ class GameState:
 
         return reward, boxA, boxB
 
-# ==== MCTS Tree Node Class ====
-# Represents a node in the Monte Carlo Tree used for MCTS (Monte Carlo Tree Search).
-# Each node tracks its parent, children, visit count, total value, and the action that led to it.
-# It supports expansion (adding child nodes), selection of the best child based on UCB1(Upper Confidence Bound 1),
-# and backpropagation of simulation rewards to update statistics.
 class TreeNode:
+    '''The MCTS Tree Node Class represents a node in the Monte Carlo Tree used 
+        for MCTS (Monte Carlo Tree Search). Each node tracks its parent, 
+        children, visit count, total value, and the action that led to it. It 
+        supports expansion (adding child nodes), selection of the best child 
+        based on UCB1(Upper Confidence Bound 1), and backpropagation of 
+        simulation rewards to update statistics.'''
     def __init__(self, parent=None, action=None):
         self.parent = parent
         self.children = {}
         self.action = action
         self.visits = 0
         self.value = 0.0
-# Checks if all valid actions have been explored from this node
-# A node is considered fully expanded if all valid actions have corresponding child nodes.
+    '''Checks if all valid actions have been explored from this node.
+        A node is considered fully expanded if all valid actions have 
+        corresponding child nodes.'''
     def is_fully_expanded(self, valid_actions):
         return set(valid_actions).issubset(set(self.children.keys()))
         
-# Selects and returns the best child node using the UCT (Upper Confidence Bound for Trees) formula.
-# Balances exploration and exploitation by considering both the average value of each child
-# and the uncertainty (based on visit count). The c_param controls the level of exploration.
+    '''Selects and returns the best child node using the UCT (Upper Confidence 
+        Bound for Trees) formula. Balances exploration and exploitation by 
+        considering both the average value of each child and the uncertainty (based
+        on visit count). The c_param controls the level of exploration.'''
     def best_child(self, c_param=1.4):
-        return max(self.children.values(), key=lambda node: node.value / (node.visits + 1e-4) + c_param * math.sqrt(math.log(self.visits + 1) / (node.visits + 1e-4)))
+        return max(self.children.values(), key=
+                   lambda node: node.value / (node.visits + 1e-4) + c_param * 
+                   math.sqrt(math.log(self.visits + 1) / (node.visits + 1e-4)))
 
-# Expands the current node by selecting a random untried action from the list of valid actions.
-# A new child node is created for the selected action and added to the current node's children.
-# Returns the newly created child node.
-    def expand(self, env, valid_actions):
+    '''Expands the current node by selecting a random untried action from the 
+        list of valid actions. A new child node is created for the selected 
+        action and added to the current node's children. Returns the newly-
+        created child node.'''
+    def expand(self, valid_actions):
         untried = [a for a in valid_actions if a not in self.children]
         action = random.choice(untried)
         self.children[action] = TreeNode(parent=self, action=action)
         return self.children[action]
         
-# Recursively update the visit count and value of the current node and its ancestors.
-# The reward is added to the current node's value, and the visit count is incremented.
-# If the node has a parent, the reward is negated (assuming a two-player zero-sum game)
-# and propagated up the tree to reflect the opponent's perspective.
+    '''Recursively update the visit count and value of the current node and its
+        ancestors. The reward is added to the current node's value, and the 
+        visit count is incremented. If the node has a parent, the reward is 
+        negated (assuming a two-player zero-sum game) and propagated up the 
+        tree to reflect the opponent's perspective.'''
     def backpropagate(self, reward):
         self.visits += 1
         self.value += reward
         if self.parent:
             self.parent.backpropagate(-reward)
 
-# ===== Monte Carlo Tree Search (MCTS) Agent =====
-# This class implements the core logic of the MCTS algorithm to make decisions in the game.
-# The agent performs multiple simulations from the current game state to estimate the best action.
-# Each simulation involves:
-#   1. Selection: Traverses the tree using UCB1 (Upper Confidence Bound 1) to select promising nodes.
-#   2. Expansion: Adds a new child node if unexplored valid actions exist.
-#   3. Simulation: Plays out the game using a heuristic policy to estimate outcome.
-#   4. Backpropagation: Propagates the result back up the tree to update node statistics.
-# The action with the highest visit count after all simulations is selected.
+
 class MCTSAgent:
+    '''The Monte Carlo Tree Search (MCTS) Agent class implements the core logic
+        of the MCTS algorithm to make decisions in the game. The agent performs
+        multiple simulations from the current game state to estimate the best 
+        action.
+        Each simulation involves:
+            1. Selection: Traverses the tree using UCB1 (Upper Confidence Bound 
+                1) to select promising nodes.
+            2. Expansion: Adds a new child node if unexplored valid actions 
+                exist.
+            3. Simulation: Plays out the game using a heuristic policy to 
+                estimate outcome.
+            4. Backpropagation: Propagates the result back up the tree to 
+                update node statistics.
+        The action with the highest visit count after all simulations is 
+        selected.'''
     def __init__(self, env, simulations=100):
         self.simulations = simulations
         self.env = env
@@ -204,11 +216,13 @@ class MCTSAgent:
 
         # Run multiple simulations
         for _ in range(self.simulations):
-            sim_state = GameState(self.env.board, self.env.rows, self.env.cols, self.env.current_player)
+            sim_state = GameState(self.env.board, self.env.rows, 
+                                  self.env.cols, self.env.current_player)
             node = root
 
             # Selection: traverse the tree until a leaf or terminal state
-            while node.is_fully_expanded(sim_state.get_valid_actions()) and node.children:
+            while (node.is_fully_expanded(sim_state.get_valid_actions()) 
+                   and node.children):
                 node = node.best_child()
                 _, _, _, done = sim_state.step(node.action)
                 if done:
@@ -218,7 +232,7 @@ class MCTSAgent:
                 continue
 
             if not node.is_fully_expanded(sim_state.get_valid_actions()):
-                node = node.expand(sim_state, sim_state.get_valid_actions())
+                node = node.expand(sim_state.get_valid_actions())
                 _, reward, _, done = sim_state.step(node.action)
             else:
                 reward = 0
@@ -272,7 +286,8 @@ class MCTSAgent:
             for dr in [-1, 1]:
                 for dc in [-1, 1]:
                     r, c = row + dr, col + dc
-                    if 0 <= r < env.board.shape[0] and 0 <= c < env.board.shape[1]:
+                    if (0 <= r < env.board.shape[0] 
+                        and 0 <= c < env.board.shape[1]):
                         if env.board[r, c] == 0:
                             _, box_posA, box_posB = env._check_box_static(r, c)
                             if box_posA or box_posB:
@@ -282,20 +297,5 @@ class MCTSAgent:
             if not risky:
                 safe_actions.append(action)
 
-        return random.choice(safe_actions) if safe_actions else random.choice(actions)
-    
-    
-        
-    # Creates and returns a deep copy of the given DotsAndBoxesEnv environment.
-    # This is useful for simulations (during MCTS) where we want to explore future states
-    # without modifying the original environment. The board and current player are copied over.
-
-    def copy_env(self, env):
-        new_env = DotsAndBoxesEnv(grid_size=env.size, visualize=False)
-        new_env.board = np.copy(env.board)
-        new_env.current_player = env.current_player
-        return new_env
-''''''
-
-
-
+        return (random.choice(safe_actions) if safe_actions 
+                else random.choice(actions))
