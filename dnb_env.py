@@ -207,6 +207,11 @@ class DotsAndBoxesEnv(gym.Env):
         Input is an action value (numerical position on the game board).
         Output is the board state, reward for boxes filled in this turn, any 
         boxes that are filled in this turn, and the "done" tracking condition"""
+        if action is None:
+            reward = None
+            boxes_filled = None
+            done = True
+            return self.board, reward, boxes_filled, done
         # Convert action index into board coordinates
         row, col = self._action_to_index(action)
         
@@ -223,7 +228,8 @@ class DotsAndBoxesEnv(gym.Env):
         '''If no box is completed, switch the player. 
         (3 - self.current_player) allows the check to appropriately set player
         1 or 2'''
-        self.current_player = 3 - self.current_player if reward == 0 else self.current_player
+        self.current_player = (3 - self.current_player 
+                               if reward == 0 else self.current_player)
 
         return self.board, reward, boxes_filled, done
 
@@ -351,29 +357,23 @@ class DotsAndBoxesEnv(gym.Env):
                     action = player2_action # Player 2's turn
 
                 # if action:
-                _, reward, boxes_filled, done = env.step(action)      
-                boxA = boxes_filled[0]
-                boxB = boxes_filled[1]
-                scores[env.current_player - 1] += reward
+                _, reward, boxes_filled, done = env.step(action)     
+                boxA = boxes_filled[0] if boxes_filled else None
+                boxB = boxes_filled[1] if boxes_filled else None
+                scores[env.current_player - 1] += reward if reward else 0
 
                 '''only call fill_box if visualization is True for the game 
                 environment'''
-                if env.visualize:
+                if env.visualize and not done:
                     if boxA is not None:
                         env.fill_box(boxA[0], boxA[1])
                     if boxB is not None:
                         env.fill_box(boxB[0], boxB[1])
                     env.render()
                 turn += 1 # alternate turns
+                if done and turn < env.action_space.n:
+                    winner = "No winner, game terminated"
                 
-            #TODO refine gameplay visualization of scores in pygame
-            # pygame.display.set_caption(f"Game over! Final Score: Player 1 = {scores[0]}, Player 2 = {scores[1]}")
-            # if scores[0] > scores[1]:
-            #     pygame.display.set_caption("Player 1 wins!")
-            # elif scores[0] < scores[1]:
-            #     pygame.display.set_caption("Player 2 wins!")
-            # elif scores[0] == scores[1]:
-            #     pygame.display.set_caption("It's a draw!")
             print(f"Game over! Final Score: Player 1 = {scores[0]}, Player 2 = {scores[1]}")
             if scores[0] > scores[1]:
                 print("Player 1 wins!")

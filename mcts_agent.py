@@ -4,6 +4,11 @@ import math
 from dnb_env import DotsAndBoxesEnv
 
 class GameState:
+    """The GameState class is used to create a static copy of the game board,
+        decoupling the Monte Carlo Tree Search simulations from the active 
+        game environment. GameState uses slighly modified versions of select
+        functions from dnb_env.py to facilitate simulations and move selection.
+    """
     def __init__(self, board, rows, cols, current_player):
         self.board = np.copy(board)
         self.rows = rows
@@ -150,37 +155,38 @@ class TreeNode:
         self.action = action
         self.visits = 0
         self.value = 0.0
-    '''Checks if all valid actions have been explored from this node.
+    
+    def is_fully_expanded(self, valid_actions):
+        '''Checks if all valid actions have been explored from this node.
         A node is considered fully expanded if all valid actions have 
         corresponding child nodes.'''
-    def is_fully_expanded(self, valid_actions):
         return set(valid_actions).issubset(set(self.children.keys()))
-        
-    '''Selects and returns the best child node using the UCT (Upper Confidence 
+    
+    def best_child(self, c_param=1.4):
+        '''Selects and returns the best child node using the UCT (Upper Confidence 
         Bound for Trees) formula. Balances exploration and exploitation by 
         considering both the average value of each child and the uncertainty (based
         on visit count). The c_param controls the level of exploration.'''
-    def best_child(self, c_param=1.4):
         return max(self.children.values(), key=
                    lambda node: node.value / (node.visits + 1e-4) + c_param * 
                    math.sqrt(math.log(self.visits + 1) / (node.visits + 1e-4)))
 
-    '''Expands the current node by selecting a random untried action from the 
+    def expand(self, valid_actions):
+        '''Expands the current node by selecting a random untried action from the 
         list of valid actions. A new child node is created for the selected 
         action and added to the current node's children. Returns the newly-
         created child node.'''
-    def expand(self, valid_actions):
         untried = [a for a in valid_actions if a not in self.children]
         action = random.choice(untried)
         self.children[action] = TreeNode(parent=self, action=action)
         return self.children[action]
         
-    '''Recursively update the visit count and value of the current node and its
+    def backpropagate(self, reward):
+        '''Recursively update the visit count and value of the current node and its
         ancestors. The reward is added to the current node's value, and the 
         visit count is incremented. If the node has a parent, the reward is 
         negated (assuming a two-player zero-sum game) and propagated up the 
         tree to reflect the opponent's perspective.'''
-    def backpropagate(self, reward):
         self.visits += 1
         self.value += reward
         if self.parent:
@@ -251,7 +257,8 @@ class MCTSAgent:
 
             node.backpropagate(reward)
 
-        best_move = max(root.children.items(), key=lambda item: item[1].visits)[0]
+        best_move = max(root.children.items(), 
+                        key=lambda item: item[1].visits)[0]
         return best_move
 
     def heuristic_policy(self, actions, env):

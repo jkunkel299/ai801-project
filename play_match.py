@@ -13,4 +13,4 @@ human_player = Human(env=game)
 
 mcts_agent = MCTSAgent(env=game, simulations=10)
 
-game.play_game(player2=mcts_agent)
+game.play_game(player1=human_player, player2=mcts_agent)

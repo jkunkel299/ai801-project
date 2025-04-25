@@ -9,15 +9,14 @@ import matplotlib.pyplot as plt
 from dnb_env import DotsAndBoxesEnv
 from mcts_agent import MCTSAgent
 
-
-
 class CNN_DQN(nn.Module):
     """Convolutional neural network"""
     def __init__(self, input_channels, output_dim):
         super(CNN_DQN, self).__init__()
-        '''Convolutional layers to extract spatial features of the dots-and-boxes board
-        each convolutional layer applies a 2D convolution over an inpyt image compsed of input planes
-        in this case the image will be the dots-and-boxes board'''
+        '''Convolutional layers to extract spatial features of the 
+        dots-and-boxes board each convolutional layer applies a 2D convolution 
+        over an input image compsed of input planes in this case the image will
+         be the dots-and-boxes board'''
         self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=32, 
                                kernel_size=3, stride=1, padding=1)
         self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, 
@@ -84,7 +83,7 @@ class DQNAgent:
         """Epsilon-greedy action selection"""
         state_tensor = self.get_state(self.env.board)
         valid_actions = self.env.get_valid_actions()
-        # print("valid actions in choose: ", valid_actions)
+        
         if np.random.rand() < self.epsilon:
             action = random.choice(valid_actions)
         else:      
@@ -96,7 +95,7 @@ class DQNAgent:
                 # Select the best action from valid actions
                 valid_q_values = {a: q_values[a] for a in valid_actions} # Filter by available actions
                 action = max(valid_q_values, key=valid_q_values.get)# Choose action with highest Q-value
-        # print("action: ",action)
+
         return action if action in valid_actions else self.choose_action()
         
     def store_experience(self, state, action, reward, next_state, done):
@@ -152,7 +151,10 @@ class DQNAgent:
             self.epsilon *= self.epsilon_decay
 
     def check_risky(self, row, col, env):
-        
+        """check adjacent positions to see if the current (row, col) move
+            gives the opponent the opportunity to make a box. A negative
+            reward (negative reinforcement) is returned if a box could be 
+            formed in the next move."""
         up_2 = row-2, col
         down_2 = row+2, col
         up_left = row-1, col-1
@@ -219,7 +221,8 @@ class DQNAgent:
         return reward
 
     def train_agent(self, num_episodes=1000):
-        """Train the convolutional neural network DQN agent on the Dots and Boxes game"""
+        """Train the convolutional neural network DQN agent on the Dots and 
+            Boxes game"""
         for episode in range(num_episodes):
             state = self.env.reset()
             done = False
@@ -239,7 +242,9 @@ class DQNAgent:
 
                 total_reward += reward
 
-                q_values = self.model(torch.tensor(state, dtype=torch.float32).unsqueeze(0))
+                q_values = self.model(torch
+                                      .tensor(state, dtype=torch.float32)
+                                      .unsqueeze(0))
                 total_q += q_values.max().item()
                 moves += 1
 
@@ -247,7 +252,6 @@ class DQNAgent:
                 self.train()
 
                 state = next_state
-                # print("moves: ", moves)
 
             self.reward_history.append(total_reward)
 
@@ -263,11 +267,11 @@ class DQNAgent:
                 print(f"Episode {episode+1}: Epsilon = {self.epsilon:.4f}")
             print("Episode: ", episode+1)
         print(f"Episode {episode+1}: Epsilon = {self.epsilon:.4f}")
-        #self.plot_q_values()
 
     def train_against_mcts(self, num_episodes=1000):
+        """Improving the training algorithm to train against an MCTS agent
+            instead of through self-play."""
         mcts_agent = MCTSAgent(self.env, simulations=5)
-        scores = [0, 0]
 
         for episode in range(num_episodes):
             self.env.reset()
@@ -279,7 +283,6 @@ class DQNAgent:
 
             while not done:
                 valid_actions = self.env.get_valid_actions()
-                # print(valid_actions)
                 if not valid_actions:
                     done = True
                     break
@@ -311,7 +314,6 @@ class DQNAgent:
                                   reward == 0 else current_player)
 
                 state = next_state
-                # print("moves: ", moves)
             
             self.reward_history.append(total_reward)
 
@@ -328,6 +330,12 @@ class DQNAgent:
             print("Episode: ", episode+1)
 
     def train_mcts_reward(self, num_episodes=1000):
+        """Improving the training algorithm to train against an MCTS agent
+            with an improved reward structure, including negative reinforcement
+            for giving the opponent the opportunity to form a box, positive 
+            reinforcement for taking moves that allow for a continued turn, and
+            larger positive and negative rewards for winning or losing the 
+            game."""
         mcts_agent = MCTSAgent(self.env, simulations=5)
         scores = [0, 0]
 
@@ -341,7 +349,6 @@ class DQNAgent:
 
             while not done:
                 valid_actions = self.env.get_valid_actions()
-                # print(valid_actions)
                 if not valid_actions:
                     done = True
                     break
@@ -387,15 +394,16 @@ class DQNAgent:
                     reward += 0.5 # bonus for getting another turn
 
                 state = next_state
-                # print("moves: ", moves)
 
-            if done: 
+            if done:
+                # Endgame bonus, +10 points for win, -10 points for loss
                 if scores[0] > scores[1]:
                     reward += 10
                 else:
                     reward -= 10
             
-                self.store_experience(last_rl_state, last_rl_action, reward, next_state, done)
+                self.store_experience(last_rl_state, last_rl_action, reward, 
+                                      next_state, done)
                 self.train()
             
             self.reward_history.append(total_reward)

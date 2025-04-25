@@ -51,13 +51,16 @@ class Human():
         waiting_for_input = True
         while waiting_for_input:
             for event in pygame.event.get():
-                # if event.type == pygame.QUIT:
-                #     pygame.quit()
-                #     return
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    pos = pygame.mouse.get_pos()
-                    action = self.mouse_click_to_action(pos)
-                    if (action and action in 
-                        self.env.get_valid_actions()):
-                        return action
+                    if event.type == pygame.QUIT:
+                        break
+                    else:
+                        pos = pygame.mouse.get_pos()
+                        action = self.mouse_click_to_action(pos)
+                        if (action and action in 
+                            self.env.get_valid_actions()):
+                            return action
