@@ -7,6 +7,8 @@ import torch.nn.functional as F
 from collections import deque
 import matplotlib.pyplot as plt
 from dnb_env import DotsAndBoxesEnv
+from mcts_agent import MCTSAgent
+
 
 
 class CNN_DQN(nn.Module):
@@ -95,7 +97,7 @@ class DQNAgent:
                 valid_q_values = {a: q_values[a] for a in valid_actions} # Filter by available actions
                 action = max(valid_q_values, key=valid_q_values.get)# Choose action with highest Q-value
         # print("action: ",action)
-        return action
+        return action if action in valid_actions else self.choose_action()
         
     def store_experience(self, state, action, reward, next_state, done):
         """Store experience tuple in memory"""
@@ -149,6 +151,73 @@ class DQNAgent:
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
 
+    def check_risky(self, row, col, env):
+        
+        up_2 = row-2, col
+        down_2 = row+2, col
+        up_left = row-1, col-1
+        up_right = row-1,col+1
+        down_left = row+1, col-1
+        down_right = row+1, col+1
+        left_2 = row, col-2
+        right_2 = row, col+2
+        
+        if row % 2 == 0: # horizontal line is drawn this turn
+            if row == 0: # if the line is on the top edge
+                if ((env.board[down_left] and env.board[down_right]) 
+                    or (env.board[down_2] and env.board[down_left])
+                    or (env.board[down_2] and env.board[down_right])):
+                    reward = -1
+                else:
+                    reward = 0
+            elif row == env.rows*2: # if the line is on the bottom edge
+                if ((env.board[up_left] and env.board[up_right]) 
+                    or (env.board[up_2] and env.board[up_left])
+                    or (env.board[up_2] and env.board[up_right])):
+                    reward = -1
+                else:
+                    reward = 0
+            else:
+                if ((env.board[down_left] and env.board[down_right]) 
+                    or (env.board[down_2] and env.board[down_left])
+                    or (env.board[down_2] and env.board[down_right])):
+                    reward = -1
+                elif ((env.board[up_left] and env.board[up_right]) 
+                    or (env.board[up_2] and env.board[up_left])
+                    or (env.board[up_2] and env.board[up_right])):
+                    reward = -1
+                else:
+                    reward = 0
+        else: # vertical line is drawn this turn
+            if col == 0: # if the line is on the left edge
+                if ((env.board[right_2] and env.board[up_right])
+                    or (env.board[right_2] and env.board[down_right])
+                    or (env.board[down_right] and env.board[up_right])):
+                    reward = -1
+                else:
+                    reward = 0
+            elif col == env.cols*2: # if the line is on the right edge
+                if ((env.board[left_2] and env.board[up_left])
+                    or (env.board[left_2] and env.board[down_left])
+                    or (env.board[down_left] and env.board[up_left])):
+                    reward = -1
+                else:
+                    reward = 0
+            else:
+                if ((env.board[right_2] and env.board[up_right])
+                    or (env.board[right_2] and env.board[down_right])
+                    or (env.board[down_right] and env.board[up_right])):
+                    reward = -1
+                elif ((env.board[left_2] and env.board[up_left])
+                    or (env.board[left_2
+                                  ] and env.board[down_left])
+                    or (env.board[down_left] and env.board[up_left])):
+                    reward = -1
+                else:
+                    reward = 0
+
+        return reward
+
     def train_agent(self, num_episodes=1000):
         """Train the convolutional neural network DQN agent on the Dots and Boxes game"""
         for episode in range(num_episodes):
@@ -195,14 +264,153 @@ class DQNAgent:
             print("Episode: ", episode+1)
         print(f"Episode {episode+1}: Epsilon = {self.epsilon:.4f}")
         #self.plot_q_values()
-        # self.plot_rewards()
 
-    # def plot_rewards(self):
-    #     plt.plot(self.reward_history)
-    #     plt.xlabel("Episode")
-    #     plt.ylabel("Total Reward")
-    #     plt.title("Training Reward Progression")
-    #     plt.show()
+    def train_against_mcts(self, num_episodes=1000):
+        mcts_agent = MCTSAgent(self.env, simulations=5)
+        scores = [0, 0]
+
+        for episode in range(num_episodes):
+            self.env.reset()
+            done = False
+            valid_actions = True
+            total_q = 0
+            moves = 0
+            total_reward = 0
+
+            while not done:
+                valid_actions = self.env.get_valid_actions()
+                # print(valid_actions)
+                if not valid_actions:
+                    done = True
+                    break
+
+                current_player = self.env.current_player
+
+                if current_player == 1:
+                    state = self.env.board
+                    action = self.choose_action()
+                else:
+                    action = mcts_agent.choose_action()
+                
+                next_state, reward, _, done = self.env.step(action)
+
+                total_reward += reward
+
+                if current_player == 1:
+                    q_values = self.model(torch
+                                          .tensor(state, dtype=torch.float32)
+                                          .unsqueeze(0))
+                    total_q += q_values.max().item()
+
+                    self.store_experience(state, action, reward, next_state, done)
+                    self.train()
+
+                moves += 1
+                
+                current_player = (3 - current_player if 
+                                  reward == 0 else current_player)
+
+                state = next_state
+                # print("moves: ", moves)
+            
+            self.reward_history.append(total_reward)
+
+            avg_q_val = total_q / moves if moves > 0 else 0
+            self.q_value_history.append(avg_q_val)
+            # update the target network periodically
+            if episode % 10 == 0:
+                self.update_target_network()
+
+            # Decay epsilon for better exploitation over time
+            self.decay_epsilon()
+            if episode % 100 == 0:
+                print(f"Episode {episode+1}: Epsilon = {self.epsilon:.4f}")
+            print("Episode: ", episode+1)
+
+    def train_mcts_reward(self, num_episodes=1000):
+        mcts_agent = MCTSAgent(self.env, simulations=5)
+        scores = [0, 0]
+
+        for episode in range(num_episodes):
+            self.env.reset()
+            done = False
+            valid_actions = True
+            total_q = 0
+            moves = 0
+            total_reward = 0
+
+            while not done:
+                valid_actions = self.env.get_valid_actions()
+                # print(valid_actions)
+                if not valid_actions:
+                    done = True
+                    break
+
+                current_player = self.env.current_player
+                previous_player = current_player
+
+                if current_player == 1:
+                    state = self.env.board
+                    action = self.choose_action()
+                else:
+                    action = mcts_agent.choose_action()
+                
+                next_state, reward, _, done = self.env.step(action)
+                
+                # add initial box-forming reward to scores array
+                scores[current_player-1] += reward
+
+                total_reward += reward
+
+                if current_player == 1:
+                    # penalize for setting up opponent to make a box
+                    row, col = self.env._action_to_index(action)
+                    reward += self.check_risky(row, col, self.env)
+
+                    q_values = self.model(torch
+                                          .tensor(state, dtype=torch.float32)
+                                          .unsqueeze(0))
+                    total_q += q_values.max().item()
+
+                    self.store_experience(state, action, reward, next_state, done)
+                    self.train()
+
+                    last_rl_state = state
+                    last_rl_action = action
+
+                moves += 1
+                
+                current_player = (3 - current_player if 
+                                  reward == 0 else current_player)
+                
+                if current_player == previous_player and previous_player == 1:
+                    reward += 0.5 # bonus for getting another turn
+
+                state = next_state
+                # print("moves: ", moves)
+
+            if done: 
+                if scores[0] > scores[1]:
+                    reward += 10
+                else:
+                    reward -= 10
+            
+                self.store_experience(last_rl_state, last_rl_action, reward, next_state, done)
+                self.train()
+            
+            self.reward_history.append(total_reward)
+
+            avg_q_val = total_q / moves if moves > 0 else 0
+            self.q_value_history.append(avg_q_val)
+            # update the target network periodically
+            if episode % 10 == 0:
+                self.update_target_network()
+
+            # Decay epsilon for better exploitation over time
+            self.decay_epsilon()
+            if episode % 100 == 0:
+                print(f"Episode {episode+1}: Epsilon = {self.epsilon:.4f}")
+            print("Episode: ", episode+1)
 
     def plot_q_values(self):
         plt.plot(self.q_value_history)

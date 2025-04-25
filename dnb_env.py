@@ -100,7 +100,7 @@ class DotsAndBoxesEnv(gym.Env):
         boxB = None
         
         if row % 2 == 0: # horizontal line is drawn this turn
-            if row == 0: # if the line is on the far left edge
+            if row == 0: # if the line is on the top edge
                 if (self.board[down_left] and self.board[down_right] 
                     and self.board[down_by_2]):
                     # box below
@@ -108,7 +108,7 @@ class DotsAndBoxesEnv(gym.Env):
                     reward = 1
                 else:
                     reward = 0
-            elif row == self.rows*2: # if the line is on the far right edge
+            elif row == self.rows*2: # if the line is on the bottom edge
                 if (self.board[up_left] and self.board[up_right] 
                     and self.board[up_by_2]):
                     # box above
@@ -137,7 +137,7 @@ class DotsAndBoxesEnv(gym.Env):
                 else:
                     reward = 0
         else: # vertical line is drawn this turn
-            if col == 0: # if the line is on the top edge
+            if col == 0: # if the line is on the left edge
                 if (self.board[up_right] and self.board[down_right] 
                     and self.board[right_by_2]):
                     # box to the right
@@ -145,7 +145,7 @@ class DotsAndBoxesEnv(gym.Env):
                     reward = 1
                 else:
                     reward = 0
-            elif col == self.cols*2: # if the line is on the bottom edge
+            elif col == self.cols*2: # if the line is on the right edge
                 if (self.board[up_left] and self.board[down_left] 
                     and self.board[left_by_2]):
                     # box to the left
@@ -341,8 +341,7 @@ class DotsAndBoxesEnv(gym.Env):
                     if player1 != 'random_moves':
                         player1_action = player1.choose_action()
                     elif player1 == 'random_moves':
-                        player1_action = 0 if turn == 0 else random.choice(valid_actions)
-                        #player1_action = random.choice(valid_actions)
+                        player1_action = random.choice(valid_actions)
                     action = player1_action # Player 1's turn
                 else:
                     if player2 != 'random_moves':
