@@ -56,7 +56,7 @@ epsilons = {
 }
 
 # RL Agents vs MCTS, RL as Player 1
-for i in range (1, 41):
+for i in range (1, 51):
     scores, players, winner = game.play_game(player1 = rl_agent_10, 
                                              player2 = mcts_agent)
     player1_arr.append('RL Agent, 10')
@@ -98,7 +98,7 @@ for i in range (1, 41):
     game.reset()
 
 # RL Agents vs MCTS, RL as Player 2
-for i in range (1, 41):
+for i in range (1, 51):
     scores, players, winner = game.play_game(player1 = mcts_agent, 
                                              player2 = rl_agent_10)
     player1_arr.append('MCTS')
@@ -140,11 +140,11 @@ for i in range (1, 41):
     game.reset()
 
 # Improved RL agent vs MCTS, RL as player 1
-for i in range (1, 41):
+for i in range (1, 51):
     scores, players, winner = game.play_game(player1 = rl_agent_10_mcts, 
                                              player2 = mcts_agent)
-    player1_arr.append('MCTS')
-    player2_arr.append('RL Agent 2.0, 10')
+    player1_arr.append('RL Agent 2.0, 10')
+    player2_arr.append('MCTS')
     player1_score_arr.append(scores[0])
     player2_score_arr.append(scores[1])
     winner_arr.append(winner)
@@ -153,8 +153,8 @@ for i in range (1, 41):
 
     scores, players, winner = game.play_game(player1 = rl_agent_100_mcts, 
                                              player2 = mcts_agent)
-    player1_arr.append('MCTS')
-    player2_arr.append('RL Agent 2.0, 100')
+    player1_arr.append('RL Agent 2.0, 100')
+    player2_arr.append('MCTS')
     player1_score_arr.append(scores[0])
     player2_score_arr.append(scores[1])
     winner_arr.append(winner)
@@ -162,7 +162,7 @@ for i in range (1, 41):
     game.reset()
 
 # Improved RL agent vs MCTS, RL as player 2
-for i in range (1, 41):
+for i in range (1, 51):
 
     scores, players, winner = game.play_game(player1 = mcts_agent, 
                                              player2 = rl_agent_10_mcts)
@@ -183,11 +183,12 @@ for i in range (1, 41):
 
     game.reset()
 
-for i in range (1, 41):
+# Improved RL agent vs MCTS, RL as player 1
+for i in range (1, 51):
     scores, players, winner = game.play_game(player1 = rl_agent_10_rewards, 
                                              player2 = mcts_agent)
-    player1_arr.append('MCTS')
-    player2_arr.append('RL Agent rewards, 10')
+    player1_arr.append('RL Agent rewards, 10')
+    player2_arr.append('MCTS')
     player1_score_arr.append(scores[0])
     player2_score_arr.append(scores[1])
     winner_arr.append(winner)
@@ -196,8 +197,8 @@ for i in range (1, 41):
 
     scores, players, winner = game.play_game(player1 = rl_agent_100_rewards, 
                                              player2 = mcts_agent)
-    player1_arr.append('MCTS')
-    player2_arr.append('RL Agent rewards, 100')
+    player1_arr.append('RL Agent rewards, 100')
+    player2_arr.append('MCTS')
     player1_score_arr.append(scores[0])
     player2_score_arr.append(scores[1])
     winner_arr.append(winner)
@@ -205,7 +206,7 @@ for i in range (1, 41):
     game.reset()
 
 # Improved RL agent vs MCTS, RL as player 2
-for i in range (1, 41):
+for i in range (1, 51):
 
     scores, players, winner = game.play_game(player1 = mcts_agent, 
                                              player2 = rl_agent_10_rewards)
