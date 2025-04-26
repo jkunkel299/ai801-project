@@ -46,9 +46,9 @@ winner_arr = []
 
 epsilons = {
     "RL_10": rl_agent_10.epsilon,
-    "RL_10": rl_agent_100.epsilon,
-    "RL_10": rl_agent_500.epsilon,
-    "RL_10": rl_agent_1000.epsilon,
+    "RL_100": rl_agent_100.epsilon,
+    "RL_500": rl_agent_500.epsilon,
+    "RL_1000": rl_agent_1000.epsilon,
     "RL_10_MCTS": rl_agent_10_mcts.epsilon,
     "RL_100_MCTS": rl_agent_100_mcts.epsilon,
     "RL_10_Rewards": rl_agent_10_rewards.epsilon,

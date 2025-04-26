@@ -1,641 +1,641 @@
 Player 1,Player 2,Player 1 score,Player 2 score,Winner
-"RL Agent, 10",MCTS,16,9,Player 1
-"RL Agent, 100",MCTS,15,10,Player 1
-"RL Agent, 500",MCTS,9,16,Player 2
-"RL Agent, 1000",MCTS,17,8,Player 1
-"RL Agent, 10",MCTS,19,6,Player 1
-"RL Agent, 100",MCTS,20,5,Player 1
+"RL Agent, 10",MCTS,12,13,Player 2
+"RL Agent, 100",MCTS,13,12,Player 1
+"RL Agent, 500",MCTS,8,17,Player 2
+"RL Agent, 1000",MCTS,15,10,Player 1
+"RL Agent, 10",MCTS,14,11,Player 1
+"RL Agent, 100",MCTS,10,15,Player 2
 "RL Agent, 500",MCTS,21,4,Player 1
-"RL Agent, 1000",MCTS,18,7,Player 1
-"RL Agent, 10",MCTS,13,12,Player 1
-"RL Agent, 100",MCTS,22,3,Player 1
-"RL Agent, 500",MCTS,14,11,Player 1
-"RL Agent, 1000",MCTS,0,25,Player 2
-"RL Agent, 10",MCTS,13,12,Player 1
-"RL Agent, 100",MCTS,16,9,Player 1
-"RL Agent, 500",MCTS,8,17,Player 2
-"RL Agent, 1000",MCTS,12,13,Player 2
-"RL Agent, 10",MCTS,11,14,Player 2
-"RL Agent, 100",MCTS,20,5,Player 1
-"RL Agent, 500",MCTS,5,20,Player 2
-"RL Agent, 1000",MCTS,2,23,Player 2
-"RL Agent, 10",MCTS,14,11,Player 1
-"RL Agent, 100",MCTS,15,10,Player 1
-"RL Agent, 500",MCTS,9,16,Player 2
-"RL Agent, 1000",MCTS,2,23,Player 2
-"RL Agent, 10",MCTS,11,14,Player 2
-"RL Agent, 100",MCTS,16,9,Player 1
-"RL Agent, 500",MCTS,18,7,Player 1
-"RL Agent, 1000",MCTS,8,17,Player 2
-"RL Agent, 10",MCTS,15,10,Player 1
-"RL Agent, 100",MCTS,25,0,Player 1
-"RL Agent, 500",MCTS,5,20,Player 2
-"RL Agent, 1000",MCTS,11,14,Player 2
-"RL Agent, 10",MCTS,16,9,Player 1
-"RL Agent, 100",MCTS,15,10,Player 1
-"RL Agent, 500",MCTS,8,17,Player 2
-"RL Agent, 1000",MCTS,21,4,Player 1
-"RL Agent, 10",MCTS,17,8,Player 1
-"RL Agent, 100",MCTS,20,5,Player 1
-"RL Agent, 500",MCTS,11,14,Player 2
-"RL Agent, 1000",MCTS,5,20,Player 2
-"RL Agent, 10",MCTS,7,18,Player 2
-"RL Agent, 100",MCTS,10,15,Player 2
-"RL Agent, 500",MCTS,15,10,Player 1
-"RL Agent, 1000",MCTS,4,21,Player 2
-"RL Agent, 10",MCTS,11,14,Player 2
-"RL Agent, 100",MCTS,13,12,Player 1
-"RL Agent, 500",MCTS,7,18,Player 2
-"RL Agent, 1000",MCTS,17,8,Player 1
-"RL Agent, 10",MCTS,6,19,Player 2
-"RL Agent, 100",MCTS,15,10,Player 1
-"RL Agent, 500",MCTS,6,19,Player 2
-"RL Agent, 1000",MCTS,10,15,Player 2
-"RL Agent, 10",MCTS,4,21,Player 2
-"RL Agent, 100",MCTS,8,17,Player 2
-"RL Agent, 500",MCTS,5,20,Player 2
-"RL Agent, 1000",MCTS,18,7,Player 1
-"RL Agent, 10",MCTS,19,6,Player 1
-"RL Agent, 100",MCTS,12,13,Player 2
-"RL Agent, 500",MCTS,12,13,Player 2
-"RL Agent, 1000",MCTS,15,10,Player 1
-"RL Agent, 10",MCTS,24,1,Player 1
-"RL Agent, 100",MCTS,8,17,Player 2
-"RL Agent, 500",MCTS,17,8,Player 1
-"RL Agent, 1000",MCTS,4,21,Player 2
-"RL Agent, 10",MCTS,20,5,Player 1
-"RL Agent, 100",MCTS,21,4,Player 1
-"RL Agent, 500",MCTS,20,5,Player 1
-"RL Agent, 1000",MCTS,9,16,Player 2
-"RL Agent, 10",MCTS,18,7,Player 1
-"RL Agent, 100",MCTS,21,4,Player 1
-"RL Agent, 500",MCTS,19,6,Player 1
-"RL Agent, 1000",MCTS,16,9,Player 1
-"RL Agent, 10",MCTS,5,20,Player 2
-"RL Agent, 100",MCTS,21,4,Player 1
-"RL Agent, 500",MCTS,16,9,Player 1
-"RL Agent, 1000",MCTS,16,9,Player 1
-"RL Agent, 10",MCTS,3,22,Player 2
-"RL Agent, 100",MCTS,15,10,Player 1
-"RL Agent, 500",MCTS,5,20,Player 2
-"RL Agent, 1000",MCTS,8,17,Player 2
-"RL Agent, 10",MCTS,4,21,Player 2
-"RL Agent, 100",MCTS,20,5,Player 1
-"RL Agent, 500",MCTS,6,19,Player 2
-"RL Agent, 1000",MCTS,18,7,Player 1
-"RL Agent, 10",MCTS,11,14,Player 2
-"RL Agent, 100",MCTS,11,14,Player 2
-"RL Agent, 500",MCTS,14,11,Player 1
-"RL Agent, 1000",MCTS,3,22,Player 2
-"RL Agent, 10",MCTS,11,14,Player 2
-"RL Agent, 100",MCTS,13,12,Player 1
-"RL Agent, 500",MCTS,19,6,Player 1
-"RL Agent, 1000",MCTS,18,7,Player 1
+"RL Agent, 1000",MCTS,7,18,Player 2
 "RL Agent, 10",MCTS,21,4,Player 1
-"RL Agent, 100",MCTS,21,4,Player 1
-"RL Agent, 500",MCTS,9,16,Player 2
-"RL Agent, 1000",MCTS,21,4,Player 1
-"RL Agent, 10",MCTS,22,3,Player 1
-"RL Agent, 100",MCTS,14,11,Player 1
-"RL Agent, 500",MCTS,15,10,Player 1
-"RL Agent, 1000",MCTS,15,10,Player 1
-"RL Agent, 10",MCTS,21,4,Player 1
-"RL Agent, 100",MCTS,10,15,Player 2
-"RL Agent, 500",MCTS,16,9,Player 1
-"RL Agent, 1000",MCTS,8,17,Player 2
-"RL Agent, 10",MCTS,10,15,Player 2
-"RL Agent, 100",MCTS,11,14,Player 2
-"RL Agent, 500",MCTS,4,21,Player 2
-"RL Agent, 1000",MCTS,1,24,Player 2
-"RL Agent, 10",MCTS,10,15,Player 2
-"RL Agent, 100",MCTS,10,15,Player 2
-"RL Agent, 500",MCTS,8,17,Player 2
-"RL Agent, 1000",MCTS,1,24,Player 2
-"RL Agent, 10",MCTS,8,17,Player 2
-"RL Agent, 100",MCTS,12,13,Player 2
-"RL Agent, 500",MCTS,19,6,Player 1
-"RL Agent, 1000",MCTS,3,22,Player 2
-"RL Agent, 10",MCTS,19,6,Player 1
-"RL Agent, 100",MCTS,16,9,Player 1
+"RL Agent, 100",MCTS,19,6,Player 1
 "RL Agent, 500",MCTS,5,20,Player 2
-"RL Agent, 1000",MCTS,13,12,Player 1
-"RL Agent, 10",MCTS,9,16,Player 2
-"RL Agent, 100",MCTS,12,13,Player 2
-"RL Agent, 500",MCTS,4,21,Player 2
-"RL Agent, 1000",MCTS,10,15,Player 2
-"RL Agent, 10",MCTS,14,11,Player 1
-"RL Agent, 100",MCTS,15,10,Player 1
-"RL Agent, 500",MCTS,23,2,Player 1
-"RL Agent, 1000",MCTS,17,8,Player 1
-"RL Agent, 10",MCTS,9,16,Player 2
-"RL Agent, 100",MCTS,16,9,Player 1
-"RL Agent, 500",MCTS,20,5,Player 1
-"RL Agent, 1000",MCTS,20,5,Player 1
-"RL Agent, 10",MCTS,11,14,Player 2
-"RL Agent, 100",MCTS,18,7,Player 1
-"RL Agent, 500",MCTS,17,8,Player 1
-"RL Agent, 1000",MCTS,15,10,Player 1
-"RL Agent, 10",MCTS,8,17,Player 2
-"RL Agent, 100",MCTS,22,3,Player 1
-"RL Agent, 500",MCTS,11,14,Player 2
 "RL Agent, 1000",MCTS,10,15,Player 2
 "RL Agent, 10",MCTS,5,20,Player 2
 "RL Agent, 100",MCTS,23,2,Player 1
-"RL Agent, 500",MCTS,10,15,Player 2
-"RL Agent, 1000",MCTS,13,12,Player 1
-"RL Agent, 10",MCTS,15,10,Player 1
-"RL Agent, 100",MCTS,17,8,Player 1
+"RL Agent, 500",MCTS,5,20,Player 2
+"RL Agent, 1000",MCTS,4,21,Player 2
+"RL Agent, 10",MCTS,2,23,Player 2
+"RL Agent, 100",MCTS,13,12,Player 1
+"RL Agent, 500",MCTS,9,16,Player 2
+"RL Agent, 1000",MCTS,7,18,Player 2
+"RL Agent, 10",MCTS,22,3,Player 1
+"RL Agent, 100",MCTS,12,13,Player 2
+"RL Agent, 500",MCTS,16,9,Player 1
+"RL Agent, 1000",MCTS,15,10,Player 1
+"RL Agent, 10",MCTS,11,14,Player 2
+"RL Agent, 100",MCTS,12,13,Player 2
+"RL Agent, 500",MCTS,11,14,Player 2
+"RL Agent, 1000",MCTS,9,16,Player 2
+"RL Agent, 10",MCTS,17,8,Player 1
+"RL Agent, 100",MCTS,9,16,Player 2
+"RL Agent, 500",MCTS,14,11,Player 1
+"RL Agent, 1000",MCTS,8,17,Player 2
+"RL Agent, 10",MCTS,22,3,Player 1
+"RL Agent, 100",MCTS,13,12,Player 1
 "RL Agent, 500",MCTS,24,1,Player 1
+"RL Agent, 1000",MCTS,20,5,Player 1
+"RL Agent, 10",MCTS,23,2,Player 1
+"RL Agent, 100",MCTS,15,10,Player 1
+"RL Agent, 500",MCTS,11,14,Player 2
+"RL Agent, 1000",MCTS,11,14,Player 2
+"RL Agent, 10",MCTS,5,20,Player 2
+"RL Agent, 100",MCTS,12,13,Player 2
+"RL Agent, 500",MCTS,3,22,Player 2
 "RL Agent, 1000",MCTS,14,11,Player 1
 "RL Agent, 10",MCTS,5,20,Player 2
-"RL Agent, 100",MCTS,8,17,Player 2
+"RL Agent, 100",MCTS,16,9,Player 1
+"RL Agent, 500",MCTS,15,10,Player 1
+"RL Agent, 1000",MCTS,3,22,Player 2
+"RL Agent, 10",MCTS,23,2,Player 1
+"RL Agent, 100",MCTS,11,14,Player 2
 "RL Agent, 500",MCTS,7,18,Player 2
+"RL Agent, 1000",MCTS,19,6,Player 1
+"RL Agent, 10",MCTS,6,19,Player 2
+"RL Agent, 100",MCTS,7,18,Player 2
+"RL Agent, 500",MCTS,7,18,Player 2
+"RL Agent, 1000",MCTS,16,9,Player 1
+"RL Agent, 10",MCTS,13,12,Player 1
+"RL Agent, 100",MCTS,13,12,Player 1
+"RL Agent, 500",MCTS,18,7,Player 1
+"RL Agent, 1000",MCTS,16,9,Player 1
+"RL Agent, 10",MCTS,13,12,Player 1
+"RL Agent, 100",MCTS,10,15,Player 2
+"RL Agent, 500",MCTS,9,16,Player 2
+"RL Agent, 1000",MCTS,17,8,Player 1
+"RL Agent, 10",MCTS,8,17,Player 2
+"RL Agent, 100",MCTS,19,6,Player 1
+"RL Agent, 500",MCTS,21,4,Player 1
+"RL Agent, 1000",MCTS,18,7,Player 1
+"RL Agent, 10",MCTS,21,4,Player 1
+"RL Agent, 100",MCTS,10,15,Player 2
+"RL Agent, 500",MCTS,19,6,Player 1
+"RL Agent, 1000",MCTS,22,3,Player 1
+"RL Agent, 10",MCTS,10,15,Player 2
+"RL Agent, 100",MCTS,13,12,Player 1
+"RL Agent, 500",MCTS,10,15,Player 2
+"RL Agent, 1000",MCTS,11,14,Player 2
+"RL Agent, 10",MCTS,21,4,Player 1
+"RL Agent, 100",MCTS,13,12,Player 1
+"RL Agent, 500",MCTS,5,20,Player 2
+"RL Agent, 1000",MCTS,7,18,Player 2
+"RL Agent, 10",MCTS,18,7,Player 1
+"RL Agent, 100",MCTS,12,13,Player 2
+"RL Agent, 500",MCTS,6,19,Player 2
+"RL Agent, 1000",MCTS,18,7,Player 1
+"RL Agent, 10",MCTS,6,19,Player 2
+"RL Agent, 100",MCTS,15,10,Player 1
+"RL Agent, 500",MCTS,2,23,Player 2
+"RL Agent, 1000",MCTS,8,17,Player 2
+"RL Agent, 10",MCTS,19,6,Player 1
+"RL Agent, 100",MCTS,11,14,Player 2
+"RL Agent, 500",MCTS,8,17,Player 2
+"RL Agent, 1000",MCTS,6,19,Player 2
+"RL Agent, 10",MCTS,10,15,Player 2
+"RL Agent, 100",MCTS,21,4,Player 1
+"RL Agent, 500",MCTS,8,17,Player 2
+"RL Agent, 1000",MCTS,3,22,Player 2
+"RL Agent, 10",MCTS,5,20,Player 2
+"RL Agent, 100",MCTS,20,5,Player 1
+"RL Agent, 500",MCTS,15,10,Player 1
+"RL Agent, 1000",MCTS,18,7,Player 1
+"RL Agent, 10",MCTS,10,15,Player 2
+"RL Agent, 100",MCTS,18,7,Player 1
+"RL Agent, 500",MCTS,13,12,Player 1
+"RL Agent, 1000",MCTS,13,12,Player 1
+"RL Agent, 10",MCTS,11,14,Player 2
+"RL Agent, 100",MCTS,8,17,Player 2
+"RL Agent, 500",MCTS,19,6,Player 1
+"RL Agent, 1000",MCTS,1,24,Player 2
+"RL Agent, 10",MCTS,21,4,Player 1
+"RL Agent, 100",MCTS,13,12,Player 1
+"RL Agent, 500",MCTS,11,14,Player 2
+"RL Agent, 1000",MCTS,17,8,Player 1
+"RL Agent, 10",MCTS,10,15,Player 2
+"RL Agent, 100",MCTS,8,17,Player 2
+"RL Agent, 500",MCTS,22,3,Player 1
+"RL Agent, 1000",MCTS,2,23,Player 2
+"RL Agent, 10",MCTS,7,18,Player 2
+"RL Agent, 100",MCTS,13,12,Player 1
+"RL Agent, 500",MCTS,15,10,Player 1
+"RL Agent, 1000",MCTS,9,16,Player 2
+"RL Agent, 10",MCTS,7,18,Player 2
+"RL Agent, 100",MCTS,21,4,Player 1
+"RL Agent, 500",MCTS,16,9,Player 1
+"RL Agent, 1000",MCTS,18,7,Player 1
+"RL Agent, 10",MCTS,16,9,Player 1
+"RL Agent, 100",MCTS,20,5,Player 1
+"RL Agent, 500",MCTS,25,0,Player 1
+"RL Agent, 1000",MCTS,25,0,Player 1
+"RL Agent, 10",MCTS,9,16,Player 2
+"RL Agent, 100",MCTS,17,8,Player 1
+"RL Agent, 500",MCTS,19,6,Player 1
+"RL Agent, 1000",MCTS,19,6,Player 1
+"RL Agent, 10",MCTS,17,8,Player 1
+"RL Agent, 100",MCTS,18,7,Player 1
+"RL Agent, 500",MCTS,4,21,Player 2
+"RL Agent, 1000",MCTS,13,12,Player 1
+"RL Agent, 10",MCTS,10,15,Player 2
+"RL Agent, 100",MCTS,19,6,Player 1
+"RL Agent, 500",MCTS,4,21,Player 2
+"RL Agent, 1000",MCTS,10,15,Player 2
+"RL Agent, 10",MCTS,6,19,Player 2
+"RL Agent, 100",MCTS,8,17,Player 2
+"RL Agent, 500",MCTS,11,14,Player 2
+"RL Agent, 1000",MCTS,7,18,Player 2
+"RL Agent, 10",MCTS,19,6,Player 1
+"RL Agent, 100",MCTS,23,2,Player 1
+"RL Agent, 500",MCTS,3,22,Player 2
+"RL Agent, 1000",MCTS,7,18,Player 2
+"RL Agent, 10",MCTS,18,7,Player 1
+"RL Agent, 100",MCTS,9,16,Player 2
+"RL Agent, 500",MCTS,3,22,Player 2
 "RL Agent, 1000",MCTS,21,4,Player 1
 "RL Agent, 10",MCTS,16,9,Player 1
-"RL Agent, 100",MCTS,22,3,Player 1
-"RL Agent, 500",MCTS,6,19,Player 2
+"RL Agent, 100",MCTS,20,5,Player 1
+"RL Agent, 500",MCTS,7,18,Player 2
+"RL Agent, 1000",MCTS,17,8,Player 1
+"RL Agent, 10",MCTS,8,17,Player 2
+"RL Agent, 100",MCTS,18,7,Player 1
+"RL Agent, 500",MCTS,17,8,Player 1
 "RL Agent, 1000",MCTS,13,12,Player 1
-"RL Agent, 10",MCTS,6,19,Player 2
-"RL Agent, 100",MCTS,9,16,Player 2
-"RL Agent, 500",MCTS,18,7,Player 1
-"RL Agent, 1000",MCTS,5,20,Player 2
-MCTS,"RL Agent, 10",12,13,Player 2
-MCTS,"RL Agent, 100",19,6,Player 1
-MCTS,"RL Agent, 500",6,19,Player 2
-MCTS,"RL Agent, 1000",11,14,Player 2
-MCTS,"RL Agent, 10",1,24,Player 2
-MCTS,"RL Agent, 100",13,12,Player 1
-MCTS,"RL Agent, 500",6,19,Player 2
-MCTS,"RL Agent, 1000",22,3,Player 1
-MCTS,"RL Agent, 10",11,14,Player 2
-MCTS,"RL Agent, 100",12,13,Player 2
-MCTS,"RL Agent, 500",6,19,Player 2
-MCTS,"RL Agent, 1000",10,15,Player 2
-MCTS,"RL Agent, 10",6,19,Player 2
-MCTS,"RL Agent, 100",4,21,Player 2
-MCTS,"RL Agent, 500",17,8,Player 1
-MCTS,"RL Agent, 1000",8,17,Player 2
-MCTS,"RL Agent, 10",6,19,Player 2
-MCTS,"RL Agent, 100",15,10,Player 1
-MCTS,"RL Agent, 500",15,10,Player 1
-MCTS,"RL Agent, 1000",6,19,Player 2
-MCTS,"RL Agent, 10",19,6,Player 1
-MCTS,"RL Agent, 100",7,18,Player 2
-MCTS,"RL Agent, 500",25,0,Player 1
-MCTS,"RL Agent, 1000",19,6,Player 1
-MCTS,"RL Agent, 10",19,6,Player 1
-MCTS,"RL Agent, 100",19,6,Player 1
-MCTS,"RL Agent, 500",23,2,Player 1
-MCTS,"RL Agent, 1000",18,7,Player 1
-MCTS,"RL Agent, 10",12,13,Player 2
-MCTS,"RL Agent, 100",12,13,Player 2
-MCTS,"RL Agent, 500",10,15,Player 2
-MCTS,"RL Agent, 1000",18,7,Player 1
-MCTS,"RL Agent, 10",16,9,Player 1
-MCTS,"RL Agent, 100",5,20,Player 2
-MCTS,"RL Agent, 500",10,15,Player 2
-MCTS,"RL Agent, 1000",15,10,Player 1
-MCTS,"RL Agent, 10",19,6,Player 1
-MCTS,"RL Agent, 100",3,22,Player 2
-MCTS,"RL Agent, 500",6,19,Player 2
-MCTS,"RL Agent, 1000",3,22,Player 2
-MCTS,"RL Agent, 10",20,5,Player 1
-MCTS,"RL Agent, 100",7,18,Player 2
-MCTS,"RL Agent, 500",6,19,Player 2
-MCTS,"RL Agent, 1000",8,17,Player 2
-MCTS,"RL Agent, 10",6,19,Player 2
-MCTS,"RL Agent, 100",8,17,Player 2
-MCTS,"RL Agent, 500",4,21,Player 2
-MCTS,"RL Agent, 1000",20,5,Player 1
-MCTS,"RL Agent, 10",16,9,Player 1
-MCTS,"RL Agent, 100",9,16,Player 2
-MCTS,"RL Agent, 500",7,18,Player 2
-MCTS,"RL Agent, 1000",8,17,Player 2
-MCTS,"RL Agent, 10",12,13,Player 2
-MCTS,"RL Agent, 100",9,16,Player 2
-MCTS,"RL Agent, 500",14,11,Player 1
-MCTS,"RL Agent, 1000",17,8,Player 1
-MCTS,"RL Agent, 10",11,14,Player 2
-MCTS,"RL Agent, 100",11,14,Player 2
-MCTS,"RL Agent, 500",21,4,Player 1
-MCTS,"RL Agent, 1000",14,11,Player 1
-MCTS,"RL Agent, 10",16,9,Player 1
-MCTS,"RL Agent, 100",13,12,Player 1
-MCTS,"RL Agent, 500",15,10,Player 1
-MCTS,"RL Agent, 1000",16,9,Player 1
-MCTS,"RL Agent, 10",17,8,Player 1
-MCTS,"RL Agent, 100",5,20,Player 2
-MCTS,"RL Agent, 500",17,8,Player 1
-MCTS,"RL Agent, 1000",23,2,Player 1
-MCTS,"RL Agent, 10",19,6,Player 1
-MCTS,"RL Agent, 100",11,14,Player 2
-MCTS,"RL Agent, 500",11,14,Player 2
-MCTS,"RL Agent, 1000",20,5,Player 1
-MCTS,"RL Agent, 10",12,13,Player 2
-MCTS,"RL Agent, 100",12,13,Player 2
-MCTS,"RL Agent, 500",20,5,Player 1
-MCTS,"RL Agent, 1000",13,12,Player 1
-MCTS,"RL Agent, 10",12,13,Player 2
-MCTS,"RL Agent, 100",7,18,Player 2
-MCTS,"RL Agent, 500",18,7,Player 1
-MCTS,"RL Agent, 1000",6,19,Player 2
-MCTS,"RL Agent, 10",18,7,Player 1
-MCTS,"RL Agent, 100",13,12,Player 1
-MCTS,"RL Agent, 500",21,4,Player 1
-MCTS,"RL Agent, 1000",11,14,Player 2
-MCTS,"RL Agent, 10",4,21,Player 2
-MCTS,"RL Agent, 100",14,11,Player 1
-MCTS,"RL Agent, 500",19,6,Player 1
-MCTS,"RL Agent, 1000",16,9,Player 1
-MCTS,"RL Agent, 10",10,15,Player 2
-MCTS,"RL Agent, 100",14,11,Player 1
-MCTS,"RL Agent, 500",6,19,Player 2
-MCTS,"RL Agent, 1000",22,3,Player 1
-MCTS,"RL Agent, 10",16,9,Player 1
-MCTS,"RL Agent, 100",8,17,Player 2
-MCTS,"RL Agent, 500",16,9,Player 1
-MCTS,"RL Agent, 1000",23,2,Player 1
-MCTS,"RL Agent, 10",3,22,Player 2
-MCTS,"RL Agent, 100",10,15,Player 2
-MCTS,"RL Agent, 500",17,8,Player 1
-MCTS,"RL Agent, 1000",11,14,Player 2
-MCTS,"RL Agent, 10",24,1,Player 1
-MCTS,"RL Agent, 100",14,11,Player 1
-MCTS,"RL Agent, 500",3,22,Player 2
-MCTS,"RL Agent, 1000",14,11,Player 1
-MCTS,"RL Agent, 10",12,13,Player 2
-MCTS,"RL Agent, 100",7,18,Player 2
-MCTS,"RL Agent, 500",9,16,Player 2
-MCTS,"RL Agent, 1000",16,9,Player 1
-MCTS,"RL Agent, 10",16,9,Player 1
-MCTS,"RL Agent, 100",4,21,Player 2
-MCTS,"RL Agent, 500",6,19,Player 2
-MCTS,"RL Agent, 1000",16,9,Player 1
-MCTS,"RL Agent, 10",15,10,Player 1
-MCTS,"RL Agent, 100",5,20,Player 2
-MCTS,"RL Agent, 500",18,7,Player 1
-MCTS,"RL Agent, 1000",19,6,Player 1
-MCTS,"RL Agent, 10",4,21,Player 2
-MCTS,"RL Agent, 100",8,17,Player 2
-MCTS,"RL Agent, 500",9,16,Player 2
-MCTS,"RL Agent, 1000",20,5,Player 1
-MCTS,"RL Agent, 10",18,7,Player 1
-MCTS,"RL Agent, 100",19,6,Player 1
-MCTS,"RL Agent, 500",20,5,Player 1
-MCTS,"RL Agent, 1000",22,3,Player 1
-MCTS,"RL Agent, 10",10,15,Player 2
-MCTS,"RL Agent, 100",6,19,Player 2
-MCTS,"RL Agent, 500",19,6,Player 1
-MCTS,"RL Agent, 1000",20,5,Player 1
-MCTS,"RL Agent, 10",15,10,Player 1
-MCTS,"RL Agent, 100",2,23,Player 2
-MCTS,"RL Agent, 500",10,15,Player 2
-MCTS,"RL Agent, 1000",22,3,Player 1
-MCTS,"RL Agent, 10",24,1,Player 1
-MCTS,"RL Agent, 100",22,3,Player 1
-MCTS,"RL Agent, 500",10,15,Player 2
-MCTS,"RL Agent, 1000",23,2,Player 1
 MCTS,"RL Agent, 10",13,12,Player 1
-MCTS,"RL Agent, 100",11,14,Player 2
-MCTS,"RL Agent, 500",2,23,Player 2
-MCTS,"RL Agent, 1000",12,13,Player 2
-MCTS,"RL Agent, 10",19,6,Player 1
-MCTS,"RL Agent, 100",13,12,Player 1
-MCTS,"RL Agent, 500",14,11,Player 1
-MCTS,"RL Agent, 1000",10,15,Player 2
-MCTS,"RL Agent, 10",12,13,Player 2
-MCTS,"RL Agent, 100",17,8,Player 1
+MCTS,"RL Agent, 100",4,21,Player 2
 MCTS,"RL Agent, 500",16,9,Player 1
 MCTS,"RL Agent, 1000",13,12,Player 1
-MCTS,"RL Agent, 10",18,7,Player 1
-MCTS,"RL Agent, 100",12,13,Player 2
-MCTS,"RL Agent, 500",6,19,Player 2
+MCTS,"RL Agent, 10",14,11,Player 1
+MCTS,"RL Agent, 100",4,21,Player 2
+MCTS,"RL Agent, 500",5,20,Player 2
+MCTS,"RL Agent, 1000",2,23,Player 2
+MCTS,"RL Agent, 10",10,15,Player 2
+MCTS,"RL Agent, 100",19,6,Player 1
+MCTS,"RL Agent, 500",16,9,Player 1
+MCTS,"RL Agent, 1000",12,13,Player 2
+MCTS,"RL Agent, 10",21,4,Player 1
+MCTS,"RL Agent, 100",9,16,Player 2
+MCTS,"RL Agent, 500",10,15,Player 2
+MCTS,"RL Agent, 1000",17,8,Player 1
+MCTS,"RL Agent, 10",22,3,Player 1
+MCTS,"RL Agent, 100",13,12,Player 1
+MCTS,"RL Agent, 500",23,2,Player 1
+MCTS,"RL Agent, 1000",11,14,Player 2
+MCTS,"RL Agent, 10",12,13,Player 2
+MCTS,"RL Agent, 100",13,12,Player 1
+MCTS,"RL Agent, 500",7,18,Player 2
+MCTS,"RL Agent, 1000",20,5,Player 1
+MCTS,"RL Agent, 10",15,10,Player 1
+MCTS,"RL Agent, 100",10,15,Player 2
+MCTS,"RL Agent, 500",22,3,Player 1
+MCTS,"RL Agent, 1000",4,21,Player 2
+MCTS,"RL Agent, 10",7,18,Player 2
+MCTS,"RL Agent, 100",19,6,Player 1
+MCTS,"RL Agent, 500",18,7,Player 1
 MCTS,"RL Agent, 1000",6,19,Player 2
+MCTS,"RL Agent, 10",23,2,Player 1
+MCTS,"RL Agent, 100",7,18,Player 2
+MCTS,"RL Agent, 500",13,12,Player 1
+MCTS,"RL Agent, 1000",19,6,Player 1
+MCTS,"RL Agent, 10",5,20,Player 2
+MCTS,"RL Agent, 100",9,16,Player 2
+MCTS,"RL Agent, 500",12,13,Player 2
+MCTS,"RL Agent, 1000",22,3,Player 1
+MCTS,"RL Agent, 10",9,16,Player 2
+MCTS,"RL Agent, 100",23,2,Player 1
+MCTS,"RL Agent, 500",6,19,Player 2
+MCTS,"RL Agent, 1000",15,10,Player 1
+MCTS,"RL Agent, 10",16,9,Player 1
+MCTS,"RL Agent, 100",7,18,Player 2
+MCTS,"RL Agent, 500",6,19,Player 2
+MCTS,"RL Agent, 1000",15,10,Player 1
+MCTS,"RL Agent, 10",10,15,Player 2
+MCTS,"RL Agent, 100",0,25,Player 2
+MCTS,"RL Agent, 500",11,14,Player 2
+MCTS,"RL Agent, 1000",12,13,Player 2
+MCTS,"RL Agent, 10",8,17,Player 2
+MCTS,"RL Agent, 100",7,18,Player 2
+MCTS,"RL Agent, 500",17,8,Player 1
+MCTS,"RL Agent, 1000",9,16,Player 2
+MCTS,"RL Agent, 10",7,18,Player 2
+MCTS,"RL Agent, 100",12,13,Player 2
+MCTS,"RL Agent, 500",18,7,Player 1
+MCTS,"RL Agent, 1000",13,12,Player 1
+MCTS,"RL Agent, 10",17,8,Player 1
+MCTS,"RL Agent, 100",18,7,Player 1
+MCTS,"RL Agent, 500",3,22,Player 2
+MCTS,"RL Agent, 1000",9,16,Player 2
 MCTS,"RL Agent, 10",16,9,Player 1
 MCTS,"RL Agent, 100",15,10,Player 1
-MCTS,"RL Agent, 500",15,10,Player 1
-MCTS,"RL Agent, 1000",4,21,Player 2
-MCTS,"RL Agent, 10",23,2,Player 1
+MCTS,"RL Agent, 500",12,13,Player 2
+MCTS,"RL Agent, 1000",14,11,Player 1
+MCTS,"RL Agent, 10",20,5,Player 1
 MCTS,"RL Agent, 100",5,20,Player 2
-MCTS,"RL Agent, 500",17,8,Player 1
+MCTS,"RL Agent, 500",22,3,Player 1
+MCTS,"RL Agent, 1000",11,14,Player 2
+MCTS,"RL Agent, 10",21,4,Player 1
+MCTS,"RL Agent, 100",6,19,Player 2
+MCTS,"RL Agent, 500",6,19,Player 2
+MCTS,"RL Agent, 1000",21,4,Player 1
+MCTS,"RL Agent, 10",1,24,Player 2
+MCTS,"RL Agent, 100",2,23,Player 2
+MCTS,"RL Agent, 500",20,5,Player 1
+MCTS,"RL Agent, 1000",14,11,Player 1
+MCTS,"RL Agent, 10",19,6,Player 1
+MCTS,"RL Agent, 100",10,15,Player 2
+MCTS,"RL Agent, 500",16,9,Player 1
+MCTS,"RL Agent, 1000",4,21,Player 2
+MCTS,"RL Agent, 10",19,6,Player 1
+MCTS,"RL Agent, 100",15,10,Player 1
+MCTS,"RL Agent, 500",10,15,Player 2
+MCTS,"RL Agent, 1000",12,13,Player 2
+MCTS,"RL Agent, 10",13,12,Player 1
+MCTS,"RL Agent, 100",6,19,Player 2
+MCTS,"RL Agent, 500",18,7,Player 1
+MCTS,"RL Agent, 1000",4,21,Player 2
+MCTS,"RL Agent, 10",4,21,Player 2
+MCTS,"RL Agent, 100",9,16,Player 2
+MCTS,"RL Agent, 500",8,17,Player 2
+MCTS,"RL Agent, 1000",5,20,Player 2
+MCTS,"RL Agent, 10",4,21,Player 2
+MCTS,"RL Agent, 100",7,18,Player 2
+MCTS,"RL Agent, 500",18,7,Player 1
+MCTS,"RL Agent, 1000",12,13,Player 2
+MCTS,"RL Agent, 10",9,16,Player 2
+MCTS,"RL Agent, 100",24,1,Player 1
+MCTS,"RL Agent, 500",7,18,Player 2
+MCTS,"RL Agent, 1000",19,6,Player 1
+MCTS,"RL Agent, 10",24,1,Player 1
+MCTS,"RL Agent, 100",15,10,Player 1
+MCTS,"RL Agent, 500",18,7,Player 1
+MCTS,"RL Agent, 1000",5,20,Player 2
+MCTS,"RL Agent, 10",15,10,Player 1
+MCTS,"RL Agent, 100",11,14,Player 2
+MCTS,"RL Agent, 500",6,19,Player 2
+MCTS,"RL Agent, 1000",7,18,Player 2
+MCTS,"RL Agent, 10",17,8,Player 1
+MCTS,"RL Agent, 100",13,12,Player 1
+MCTS,"RL Agent, 500",9,16,Player 2
+MCTS,"RL Agent, 1000",10,15,Player 2
+MCTS,"RL Agent, 10",15,10,Player 1
+MCTS,"RL Agent, 100",19,6,Player 1
+MCTS,"RL Agent, 500",4,21,Player 2
+MCTS,"RL Agent, 1000",21,4,Player 1
+MCTS,"RL Agent, 10",16,9,Player 1
+MCTS,"RL Agent, 100",5,20,Player 2
+MCTS,"RL Agent, 500",2,23,Player 2
+MCTS,"RL Agent, 1000",23,2,Player 1
+MCTS,"RL Agent, 10",4,21,Player 2
+MCTS,"RL Agent, 100",17,8,Player 1
+MCTS,"RL Agent, 500",18,7,Player 1
+MCTS,"RL Agent, 1000",12,13,Player 2
+MCTS,"RL Agent, 10",12,13,Player 2
+MCTS,"RL Agent, 100",7,18,Player 2
+MCTS,"RL Agent, 500",10,15,Player 2
 MCTS,"RL Agent, 1000",17,8,Player 1
-MCTS,"RL Agent 2.0, 10",5,20,Player 2
-MCTS,"RL Agent 2.0, 100",10,15,Player 2
-MCTS,"RL Agent 2.0, 10",15,10,Player 1
-MCTS,"RL Agent 2.0, 100",19,6,Player 1
-MCTS,"RL Agent 2.0, 10",5,20,Player 2
-MCTS,"RL Agent 2.0, 100",21,4,Player 1
-MCTS,"RL Agent 2.0, 10",18,7,Player 1
-MCTS,"RL Agent 2.0, 100",17,8,Player 1
-MCTS,"RL Agent 2.0, 10",7,18,Player 2
-MCTS,"RL Agent 2.0, 100",18,7,Player 1
-MCTS,"RL Agent 2.0, 10",7,18,Player 2
-MCTS,"RL Agent 2.0, 100",15,10,Player 1
-MCTS,"RL Agent 2.0, 10",24,1,Player 1
-MCTS,"RL Agent 2.0, 100",10,15,Player 2
-MCTS,"RL Agent 2.0, 10",17,8,Player 1
-MCTS,"RL Agent 2.0, 100",19,6,Player 1
-MCTS,"RL Agent 2.0, 10",22,3,Player 1
-MCTS,"RL Agent 2.0, 100",3,22,Player 2
-MCTS,"RL Agent 2.0, 10",4,21,Player 2
-MCTS,"RL Agent 2.0, 100",13,12,Player 1
-MCTS,"RL Agent 2.0, 10",21,4,Player 1
-MCTS,"RL Agent 2.0, 100",15,10,Player 1
-MCTS,"RL Agent 2.0, 10",2,23,Player 2
-MCTS,"RL Agent 2.0, 100",18,7,Player 1
-MCTS,"RL Agent 2.0, 10",22,3,Player 1
-MCTS,"RL Agent 2.0, 100",12,13,Player 2
-MCTS,"RL Agent 2.0, 10",4,21,Player 2
-MCTS,"RL Agent 2.0, 100",19,6,Player 1
-MCTS,"RL Agent 2.0, 10",21,4,Player 1
-MCTS,"RL Agent 2.0, 100",9,16,Player 2
-MCTS,"RL Agent 2.0, 10",11,14,Player 2
-MCTS,"RL Agent 2.0, 100",14,11,Player 1
-MCTS,"RL Agent 2.0, 10",10,15,Player 2
-MCTS,"RL Agent 2.0, 100",16,9,Player 1
-MCTS,"RL Agent 2.0, 10",10,15,Player 2
-MCTS,"RL Agent 2.0, 100",8,17,Player 2
-MCTS,"RL Agent 2.0, 10",8,17,Player 2
-MCTS,"RL Agent 2.0, 100",23,2,Player 1
-MCTS,"RL Agent 2.0, 10",11,14,Player 2
-MCTS,"RL Agent 2.0, 100",25,0,Player 1
-MCTS,"RL Agent 2.0, 10",24,1,Player 1
-MCTS,"RL Agent 2.0, 100",18,7,Player 1
-MCTS,"RL Agent 2.0, 10",22,3,Player 1
-MCTS,"RL Agent 2.0, 100",11,14,Player 2
-MCTS,"RL Agent 2.0, 10",22,3,Player 1
-MCTS,"RL Agent 2.0, 100",13,12,Player 1
-MCTS,"RL Agent 2.0, 10",17,8,Player 1
-MCTS,"RL Agent 2.0, 100",11,14,Player 2
-MCTS,"RL Agent 2.0, 10",20,5,Player 1
-MCTS,"RL Agent 2.0, 100",10,15,Player 2
-MCTS,"RL Agent 2.0, 10",20,5,Player 1
-MCTS,"RL Agent 2.0, 100",15,10,Player 1
-MCTS,"RL Agent 2.0, 10",10,15,Player 2
-MCTS,"RL Agent 2.0, 100",17,8,Player 1
-MCTS,"RL Agent 2.0, 10",17,8,Player 1
-MCTS,"RL Agent 2.0, 100",17,8,Player 1
-MCTS,"RL Agent 2.0, 10",6,19,Player 2
-MCTS,"RL Agent 2.0, 100",15,10,Player 1
-MCTS,"RL Agent 2.0, 10",16,9,Player 1
-MCTS,"RL Agent 2.0, 100",13,12,Player 1
-MCTS,"RL Agent 2.0, 10",15,10,Player 1
-MCTS,"RL Agent 2.0, 100",10,15,Player 2
-MCTS,"RL Agent 2.0, 10",10,15,Player 2
-MCTS,"RL Agent 2.0, 100",23,2,Player 1
-MCTS,"RL Agent 2.0, 10",9,16,Player 2
-MCTS,"RL Agent 2.0, 100",21,4,Player 1
-MCTS,"RL Agent 2.0, 10",10,15,Player 2
-MCTS,"RL Agent 2.0, 100",11,14,Player 2
-MCTS,"RL Agent 2.0, 10",21,4,Player 1
-MCTS,"RL Agent 2.0, 100",18,7,Player 1
-MCTS,"RL Agent 2.0, 10",19,6,Player 1
-MCTS,"RL Agent 2.0, 100",16,9,Player 1
-MCTS,"RL Agent 2.0, 10",18,7,Player 1
-MCTS,"RL Agent 2.0, 100",18,7,Player 1
-MCTS,"RL Agent 2.0, 10",10,15,Player 2
-MCTS,"RL Agent 2.0, 100",22,3,Player 1
-MCTS,"RL Agent 2.0, 10",2,23,Player 2
-MCTS,"RL Agent 2.0, 100",2,23,Player 2
-MCTS,"RL Agent 2.0, 10",22,3,Player 1
-MCTS,"RL Agent 2.0, 100",13,12,Player 1
+MCTS,"RL Agent, 10",13,12,Player 1
+MCTS,"RL Agent, 100",12,13,Player 2
+MCTS,"RL Agent, 500",18,7,Player 1
+MCTS,"RL Agent, 1000",20,5,Player 1
+MCTS,"RL Agent, 10",18,7,Player 1
+MCTS,"RL Agent, 100",21,4,Player 1
+MCTS,"RL Agent, 500",4,21,Player 2
+MCTS,"RL Agent, 1000",22,3,Player 1
+MCTS,"RL Agent, 10",9,16,Player 2
+MCTS,"RL Agent, 100",14,11,Player 1
+MCTS,"RL Agent, 500",13,12,Player 1
+MCTS,"RL Agent, 1000",15,10,Player 1
+MCTS,"RL Agent, 10",16,9,Player 1
+MCTS,"RL Agent, 100",14,11,Player 1
+MCTS,"RL Agent, 500",18,7,Player 1
+MCTS,"RL Agent, 1000",9,16,Player 2
+MCTS,"RL Agent, 10",4,21,Player 2
+MCTS,"RL Agent, 100",10,15,Player 2
+MCTS,"RL Agent, 500",8,17,Player 2
+MCTS,"RL Agent, 1000",3,22,Player 2
+MCTS,"RL Agent, 10",8,17,Player 2
+MCTS,"RL Agent, 100",8,17,Player 2
+MCTS,"RL Agent, 500",11,14,Player 2
+MCTS,"RL Agent, 1000",4,21,Player 2
+MCTS,"RL Agent, 10",6,19,Player 2
+MCTS,"RL Agent, 100",4,21,Player 2
+MCTS,"RL Agent, 500",19,6,Player 1
+MCTS,"RL Agent, 1000",4,21,Player 2
 MCTS,"RL Agent 2.0, 10",14,11,Player 1
-MCTS,"RL Agent 2.0, 100",11,14,Player 2
-MCTS,"RL Agent 2.0, 10",14,11,Player 1
-MCTS,"RL Agent 2.0, 100",9,16,Player 2
-MCTS,"RL Agent 2.0, 10",14,11,Player 1
-MCTS,"RL Agent 2.0, 100",18,7,Player 1
-MCTS,"RL Agent 2.0, 10",15,10,Player 1
 MCTS,"RL Agent 2.0, 100",17,8,Player 1
-MCTS,"RL Agent 2.0, 10",16,9,Player 1
-MCTS,"RL Agent 2.0, 100",10,15,Player 2
-MCTS,"RL Agent 2.0, 10",6,19,Player 2
-MCTS,"RL Agent 2.0, 100",17,8,Player 1
-MCTS,"RL Agent 2.0, 10",10,15,Player 2
-MCTS,"RL Agent 2.0, 100",7,18,Player 2
-MCTS,"RL Agent 2.0, 10",7,18,Player 2
-MCTS,"RL Agent 2.0, 100",1,24,Player 2
-MCTS,"RL Agent 2.0, 10",10,15,Player 2
-MCTS,"RL Agent 2.0, 100",2,23,Player 2
-MCTS,"RL Agent 2.0, 10",9,16,Player 2
+MCTS,"RL Agent 2.0, 10",21,4,Player 1
 MCTS,"RL Agent 2.0, 100",4,21,Player 2
-MCTS,"RL Agent 2.0, 10",13,12,Player 1
-MCTS,"RL Agent 2.0, 100",5,20,Player 2
-MCTS,"RL Agent 2.0, 10",14,11,Player 1
+MCTS,"RL Agent 2.0, 10",1,24,Player 2
+MCTS,"RL Agent 2.0, 100",12,13,Player 2
+MCTS,"RL Agent 2.0, 10",8,17,Player 2
 MCTS,"RL Agent 2.0, 100",2,23,Player 2
-MCTS,"RL Agent 2.0, 10",7,18,Player 2
-MCTS,"RL Agent 2.0, 100",7,18,Player 2
-MCTS,"RL Agent 2.0, 10",17,8,Player 1
+MCTS,"RL Agent 2.0, 10",8,17,Player 2
+MCTS,"RL Agent 2.0, 100",16,9,Player 1
+MCTS,"RL Agent 2.0, 10",5,20,Player 2
+MCTS,"RL Agent 2.0, 100",20,5,Player 1
+MCTS,"RL Agent 2.0, 10",20,5,Player 1
+MCTS,"RL Agent 2.0, 100",16,9,Player 1
+MCTS,"RL Agent 2.0, 10",16,9,Player 1
+MCTS,"RL Agent 2.0, 100",19,6,Player 1
+MCTS,"RL Agent 2.0, 10",1,24,Player 2
+MCTS,"RL Agent 2.0, 100",19,6,Player 1
+MCTS,"RL Agent 2.0, 10",14,11,Player 1
+MCTS,"RL Agent 2.0, 100",14,11,Player 1
+MCTS,"RL Agent 2.0, 10",9,16,Player 2
+MCTS,"RL Agent 2.0, 100",16,9,Player 1
+MCTS,"RL Agent 2.0, 10",14,11,Player 1
+MCTS,"RL Agent 2.0, 100",17,8,Player 1
+MCTS,"RL Agent 2.0, 10",15,10,Player 1
+MCTS,"RL Agent 2.0, 100",5,20,Player 2
+MCTS,"RL Agent 2.0, 10",9,16,Player 2
+MCTS,"RL Agent 2.0, 100",2,23,Player 2
+MCTS,"RL Agent 2.0, 10",8,17,Player 2
+MCTS,"RL Agent 2.0, 100",18,7,Player 1
+MCTS,"RL Agent 2.0, 10",13,12,Player 1
+MCTS,"RL Agent 2.0, 100",15,10,Player 1
+MCTS,"RL Agent 2.0, 10",12,13,Player 2
+MCTS,"RL Agent 2.0, 100",11,14,Player 2
+MCTS,"RL Agent 2.0, 10",11,14,Player 2
+MCTS,"RL Agent 2.0, 100",18,7,Player 1
+MCTS,"RL Agent 2.0, 10",1,24,Player 2
+MCTS,"RL Agent 2.0, 100",1,24,Player 2
+MCTS,"RL Agent 2.0, 10",11,14,Player 2
+MCTS,"RL Agent 2.0, 100",2,23,Player 2
+MCTS,"RL Agent 2.0, 10",10,15,Player 2
+MCTS,"RL Agent 2.0, 100",21,4,Player 1
+MCTS,"RL Agent 2.0, 10",15,10,Player 1
 MCTS,"RL Agent 2.0, 100",20,5,Player 1
 MCTS,"RL Agent 2.0, 10",14,11,Player 1
-MCTS,"RL Agent 2.0, 100",12,13,Player 2
-MCTS,"RL Agent 2.0, 10",17,8,Player 1
-MCTS,"RL Agent 2.0, 100",9,16,Player 2
-MCTS,"RL Agent 2.0, 10",14,11,Player 1
-MCTS,"RL Agent 2.0, 100",10,15,Player 2
-MCTS,"RL Agent 2.0, 10",14,11,Player 1
-MCTS,"RL Agent 2.0, 100",5,20,Player 2
-MCTS,"RL Agent 2.0, 10",2,23,Player 2
-MCTS,"RL Agent 2.0, 100",5,20,Player 2
-MCTS,"RL Agent 2.0, 10",2,23,Player 2
-MCTS,"RL Agent 2.0, 100",5,20,Player 2
-MCTS,"RL Agent 2.0, 10",15,10,Player 1
-MCTS,"RL Agent 2.0, 100",10,15,Player 2
-MCTS,"RL Agent 2.0, 10",10,15,Player 2
-MCTS,"RL Agent 2.0, 100",12,13,Player 2
+MCTS,"RL Agent 2.0, 100",2,23,Player 2
+MCTS,"RL Agent 2.0, 10",6,19,Player 2
+MCTS,"RL Agent 2.0, 100",15,10,Player 1
+MCTS,"RL Agent 2.0, 10",7,18,Player 2
+MCTS,"RL Agent 2.0, 100",24,1,Player 1
 MCTS,"RL Agent 2.0, 10",13,12,Player 1
-MCTS,"RL Agent 2.0, 100",8,17,Player 2
-MCTS,"RL Agent 2.0, 10",12,13,Player 2
-MCTS,"RL Agent 2.0, 100",10,15,Player 2
-MCTS,"RL Agent 2.0, 10",20,5,Player 1
-MCTS,"RL Agent 2.0, 100",3,22,Player 2
-MCTS,"RL Agent 2.0, 10",20,5,Player 1
-MCTS,"RL Agent 2.0, 100",11,14,Player 2
-MCTS,"RL Agent 2.0, 10",14,11,Player 1
+MCTS,"RL Agent 2.0, 100",22,3,Player 1
+MCTS,"RL Agent 2.0, 10",13,12,Player 1
+MCTS,"RL Agent 2.0, 100",2,23,Player 2
+MCTS,"RL Agent 2.0, 10",13,12,Player 1
 MCTS,"RL Agent 2.0, 100",17,8,Player 1
-MCTS,"RL Agent 2.0, 10",13,12,Player 1
+MCTS,"RL Agent 2.0, 10",7,18,Player 2
+MCTS,"RL Agent 2.0, 100",15,10,Player 1
+MCTS,"RL Agent 2.0, 10",15,10,Player 1
+MCTS,"RL Agent 2.0, 100",5,20,Player 2
+MCTS,"RL Agent 2.0, 10",21,4,Player 1
+MCTS,"RL Agent 2.0, 100",14,11,Player 1
+MCTS,"RL Agent 2.0, 10",17,8,Player 1
 MCTS,"RL Agent 2.0, 100",16,9,Player 1
-MCTS,"RL Agent 2.0, 10",16,9,Player 1
-MCTS,"RL Agent 2.0, 100",16,9,Player 1
-MCTS,"RL Agent 2.0, 10",3,22,Player 2
-MCTS,"RL Agent 2.0, 100",14,11,Player 1
-MCTS,"RL Agent 2.0, 10",1,24,Player 2
-MCTS,"RL Agent 2.0, 100",13,12,Player 1
-MCTS,"RL Agent 2.0, 10",12,13,Player 2
-MCTS,"RL Agent 2.0, 100",23,2,Player 1
-MCTS,"RL Agent 2.0, 10",13,12,Player 1
-MCTS,"RL Agent 2.0, 100",14,11,Player 1
-MCTS,"RL Agent 2.0, 10",14,11,Player 1
-MCTS,"RL Agent 2.0, 100",14,11,Player 1
-MCTS,"RL Agent 2.0, 10",12,13,Player 2
+MCTS,"RL Agent 2.0, 10",4,21,Player 2
 MCTS,"RL Agent 2.0, 100",17,8,Player 1
 MCTS,"RL Agent 2.0, 10",5,20,Player 2
+MCTS,"RL Agent 2.0, 100",19,6,Player 1
+MCTS,"RL Agent 2.0, 10",13,12,Player 1
 MCTS,"RL Agent 2.0, 100",12,13,Player 2
-MCTS,"RL Agent 2.0, 10",15,10,Player 1
+MCTS,"RL Agent 2.0, 10",6,19,Player 2
 MCTS,"RL Agent 2.0, 100",10,15,Player 2
-MCTS,"RL Agent 2.0, 10",6,19,Player 2
+MCTS,"RL Agent 2.0, 10",12,13,Player 2
+MCTS,"RL Agent 2.0, 100",10,15,Player 2
+MCTS,"RL Agent 2.0, 10",7,18,Player 2
+MCTS,"RL Agent 2.0, 100",15,10,Player 1
+MCTS,"RL Agent 2.0, 10",19,6,Player 1
+MCTS,"RL Agent 2.0, 100",4,21,Player 2
+MCTS,"RL Agent 2.0, 10",14,11,Player 1
+MCTS,"RL Agent 2.0, 100",13,12,Player 1
+MCTS,"RL Agent 2.0, 10",17,8,Player 1
+MCTS,"RL Agent 2.0, 100",16,9,Player 1
+MCTS,"RL Agent 2.0, 10",9,16,Player 2
+MCTS,"RL Agent 2.0, 100",8,17,Player 2
+MCTS,"RL Agent 2.0, 10",20,5,Player 1
+MCTS,"RL Agent 2.0, 100",21,4,Player 1
+MCTS,"RL Agent 2.0, 10",17,8,Player 1
+MCTS,"RL Agent 2.0, 100",21,4,Player 1
+MCTS,"RL Agent 2.0, 10",21,4,Player 1
+MCTS,"RL Agent 2.0, 100",10,15,Player 2
+MCTS,"RL Agent 2.0, 10",17,8,Player 1
+MCTS,"RL Agent 2.0, 100",11,14,Player 2
+MCTS,"RL Agent 2.0, 10",22,3,Player 1
+MCTS,"RL Agent 2.0, 100",7,18,Player 2
+MCTS,"RL Agent 2.0, 10",7,18,Player 2
+MCTS,"RL Agent 2.0, 100",9,16,Player 2
+MCTS,"RL Agent 2.0, 10",8,17,Player 2
+MCTS,"RL Agent 2.0, 100",9,16,Player 2
+MCTS,"RL Agent 2.0, 10",7,18,Player 2
 MCTS,"RL Agent 2.0, 100",12,13,Player 2
-MCTS,"RL Agent 2.0, 10",6,19,Player 2
+MCTS,"RL Agent 2.0, 10",17,8,Player 1
+MCTS,"RL Agent 2.0, 100",14,11,Player 1
+MCTS,"RL Agent 2.0, 10",4,21,Player 2
+MCTS,"RL Agent 2.0, 100",10,15,Player 2
+MCTS,"RL Agent 2.0, 10",11,14,Player 2
 MCTS,"RL Agent 2.0, 100",17,8,Player 1
+MCTS,"RL Agent 2.0, 10",3,22,Player 2
+MCTS,"RL Agent 2.0, 100",2,23,Player 2
+MCTS,"RL Agent 2.0, 10",20,5,Player 1
+MCTS,"RL Agent 2.0, 100",6,19,Player 2
+MCTS,"RL Agent 2.0, 10",19,6,Player 1
+MCTS,"RL Agent 2.0, 100",11,14,Player 2
+MCTS,"RL Agent 2.0, 10",7,18,Player 2
+MCTS,"RL Agent 2.0, 100",4,21,Player 2
+MCTS,"RL Agent 2.0, 10",17,8,Player 1
+MCTS,"RL Agent 2.0, 100",5,20,Player 2
+MCTS,"RL Agent 2.0, 10",8,17,Player 2
+MCTS,"RL Agent 2.0, 100",21,4,Player 1
+MCTS,"RL Agent 2.0, 10",18,7,Player 1
+MCTS,"RL Agent 2.0, 100",10,15,Player 2
+MCTS,"RL Agent 2.0, 10",12,13,Player 2
+MCTS,"RL Agent 2.0, 100",10,15,Player 2
+MCTS,"RL Agent 2.0, 10",18,7,Player 1
+MCTS,"RL Agent 2.0, 100",23,2,Player 1
+MCTS,"RL Agent 2.0, 10",7,18,Player 2
+MCTS,"RL Agent 2.0, 100",11,14,Player 2
+MCTS,"RL Agent 2.0, 10",5,20,Player 2
+MCTS,"RL Agent 2.0, 100",12,13,Player 2
+MCTS,"RL Agent 2.0, 10",16,9,Player 1
+MCTS,"RL Agent 2.0, 100",16,9,Player 1
+MCTS,"RL Agent 2.0, 10",14,11,Player 1
+MCTS,"RL Agent 2.0, 100",6,19,Player 2
+MCTS,"RL Agent 2.0, 10",19,6,Player 1
+MCTS,"RL Agent 2.0, 100",3,22,Player 2
+MCTS,"RL Agent 2.0, 10",22,3,Player 1
+MCTS,"RL Agent 2.0, 100",2,23,Player 2
+MCTS,"RL Agent 2.0, 10",21,4,Player 1
+MCTS,"RL Agent 2.0, 100",21,4,Player 1
+MCTS,"RL Agent 2.0, 10",6,19,Player 2
+MCTS,"RL Agent 2.0, 100",5,20,Player 2
+MCTS,"RL Agent 2.0, 10",12,13,Player 2
+MCTS,"RL Agent 2.0, 100",8,17,Player 2
+MCTS,"RL Agent 2.0, 10",18,7,Player 1
+MCTS,"RL Agent 2.0, 100",12,13,Player 2
+MCTS,"RL Agent 2.0, 10",3,22,Player 2
+MCTS,"RL Agent 2.0, 100",4,21,Player 2
+MCTS,"RL Agent 2.0, 10",7,18,Player 2
+MCTS,"RL Agent 2.0, 100",17,8,Player 1
+MCTS,"RL Agent 2.0, 10",17,8,Player 1
+MCTS,"RL Agent 2.0, 100",4,21,Player 2
+MCTS,"RL Agent 2.0, 10",10,15,Player 2
+MCTS,"RL Agent 2.0, 100",13,12,Player 1
 MCTS,"RL Agent 2.0, 10",14,11,Player 1
 MCTS,"RL Agent 2.0, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",12,13,Player 2
-MCTS,"RL Agent rewards, 100",7,18,Player 2
-MCTS,"RL Agent rewards, 10",13,12,Player 1
+MCTS,"RL Agent 2.0, 10",15,10,Player 1
+MCTS,"RL Agent 2.0, 100",15,10,Player 1
+MCTS,"RL Agent 2.0, 10",23,2,Player 1
+MCTS,"RL Agent 2.0, 100",22,3,Player 1
+MCTS,"RL Agent 2.0, 10",11,14,Player 2
+MCTS,"RL Agent 2.0, 100",2,23,Player 2
+MCTS,"RL Agent rewards, 10",15,10,Player 1
+MCTS,"RL Agent rewards, 100",21,4,Player 1
+MCTS,"RL Agent rewards, 10",7,18,Player 2
+MCTS,"RL Agent rewards, 100",4,21,Player 2
+MCTS,"RL Agent rewards, 10",6,19,Player 2
 MCTS,"RL Agent rewards, 100",23,2,Player 1
-MCTS,"RL Agent rewards, 10",22,3,Player 1
-MCTS,"RL Agent rewards, 100",15,10,Player 1
-MCTS,"RL Agent rewards, 10",8,17,Player 2
-MCTS,"RL Agent rewards, 100",20,5,Player 1
-MCTS,"RL Agent rewards, 10",11,14,Player 2
-MCTS,"RL Agent rewards, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",21,4,Player 1
-MCTS,"RL Agent rewards, 100",16,9,Player 1
-MCTS,"RL Agent rewards, 10",18,7,Player 1
-MCTS,"RL Agent rewards, 100",24,1,Player 1
-MCTS,"RL Agent rewards, 10",10,15,Player 2
-MCTS,"RL Agent rewards, 100",15,10,Player 1
-MCTS,"RL Agent rewards, 10",13,12,Player 1
-MCTS,"RL Agent rewards, 100",12,13,Player 2
-MCTS,"RL Agent rewards, 10",9,16,Player 2
-MCTS,"RL Agent rewards, 100",14,11,Player 1
-MCTS,"RL Agent rewards, 10",15,10,Player 1
-MCTS,"RL Agent rewards, 100",5,20,Player 2
 MCTS,"RL Agent rewards, 10",19,6,Player 1
-MCTS,"RL Agent rewards, 100",21,4,Player 1
-MCTS,"RL Agent rewards, 10",9,16,Player 2
-MCTS,"RL Agent rewards, 100",17,8,Player 1
-MCTS,"RL Agent rewards, 10",18,7,Player 1
-MCTS,"RL Agent rewards, 100",16,9,Player 1
-MCTS,"RL Agent rewards, 10",4,21,Player 2
-MCTS,"RL Agent rewards, 100",8,17,Player 2
-MCTS,"RL Agent rewards, 10",6,19,Player 2
-MCTS,"RL Agent rewards, 100",18,7,Player 1
-MCTS,"RL Agent rewards, 10",12,13,Player 2
-MCTS,"RL Agent rewards, 100",21,4,Player 1
-MCTS,"RL Agent rewards, 10",17,8,Player 1
-MCTS,"RL Agent rewards, 100",9,16,Player 2
-MCTS,"RL Agent rewards, 10",6,19,Player 2
-MCTS,"RL Agent rewards, 100",14,11,Player 1
-MCTS,"RL Agent rewards, 10",16,9,Player 1
-MCTS,"RL Agent rewards, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",17,8,Player 1
-MCTS,"RL Agent rewards, 100",13,12,Player 1
-MCTS,"RL Agent rewards, 10",4,21,Player 2
-MCTS,"RL Agent rewards, 100",14,11,Player 1
-MCTS,"RL Agent rewards, 10",16,9,Player 1
-MCTS,"RL Agent rewards, 100",15,10,Player 1
-MCTS,"RL Agent rewards, 10",14,11,Player 1
-MCTS,"RL Agent rewards, 100",9,16,Player 2
-MCTS,"RL Agent rewards, 10",11,14,Player 2
 MCTS,"RL Agent rewards, 100",12,13,Player 2
-MCTS,"RL Agent rewards, 10",10,15,Player 2
-MCTS,"RL Agent rewards, 100",16,9,Player 1
-MCTS,"RL Agent rewards, 10",15,10,Player 1
-MCTS,"RL Agent rewards, 100",16,9,Player 1
-MCTS,"RL Agent rewards, 10",11,14,Player 2
-MCTS,"RL Agent rewards, 100",18,7,Player 1
-MCTS,"RL Agent rewards, 10",3,22,Player 2
-MCTS,"RL Agent rewards, 100",13,12,Player 1
-MCTS,"RL Agent rewards, 10",5,20,Player 2
-MCTS,"RL Agent rewards, 100",5,20,Player 2
-MCTS,"RL Agent rewards, 10",21,4,Player 1
-MCTS,"RL Agent rewards, 100",5,20,Player 2
-MCTS,"RL Agent rewards, 10",6,19,Player 2
-MCTS,"RL Agent rewards, 100",13,12,Player 1
-MCTS,"RL Agent rewards, 10",0,25,Player 2
-MCTS,"RL Agent rewards, 100",7,18,Player 2
-MCTS,"RL Agent rewards, 10",6,19,Player 2
+MCTS,"RL Agent rewards, 10",19,6,Player 1
+MCTS,"RL Agent rewards, 100",22,3,Player 1
+MCTS,"RL Agent rewards, 10",19,6,Player 1
 MCTS,"RL Agent rewards, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",5,20,Player 2
-MCTS,"RL Agent rewards, 100",4,21,Player 2
-MCTS,"RL Agent rewards, 10",9,16,Player 2
-MCTS,"RL Agent rewards, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",1,24,Player 2
-MCTS,"RL Agent rewards, 100",19,6,Player 1
-MCTS,"RL Agent rewards, 10",21,4,Player 1
-MCTS,"RL Agent rewards, 100",18,7,Player 1
-MCTS,"RL Agent rewards, 10",1,24,Player 2
-MCTS,"RL Agent rewards, 100",8,17,Player 2
-MCTS,"RL Agent rewards, 10",17,8,Player 1
-MCTS,"RL Agent rewards, 100",12,13,Player 2
-MCTS,"RL Agent rewards, 10",7,18,Player 2
-MCTS,"RL Agent rewards, 100",17,8,Player 1
-MCTS,"RL Agent rewards, 10",13,12,Player 1
-MCTS,"RL Agent rewards, 100",21,4,Player 1
-MCTS,"RL Agent rewards, 10",22,3,Player 1
+MCTS,"RL Agent rewards, 10",4,21,Player 2
 MCTS,"RL Agent rewards, 100",1,24,Player 2
-MCTS,"RL Agent rewards, 10",10,15,Player 2
-MCTS,"RL Agent rewards, 100",15,10,Player 1
-MCTS,"RL Agent rewards, 10",7,18,Player 2
-MCTS,"RL Agent rewards, 100",13,12,Player 1
-MCTS,"RL Agent rewards, 10",5,20,Player 2
-MCTS,"RL Agent rewards, 100",20,5,Player 1
 MCTS,"RL Agent rewards, 10",15,10,Player 1
-MCTS,"RL Agent rewards, 100",4,21,Player 2
-MCTS,"RL Agent rewards, 10",13,12,Player 1
-MCTS,"RL Agent rewards, 100",14,11,Player 1
-MCTS,"RL Agent rewards, 10",16,9,Player 1
-MCTS,"RL Agent rewards, 100",15,10,Player 1
-MCTS,"RL Agent rewards, 10",13,12,Player 1
-MCTS,"RL Agent rewards, 100",10,15,Player 2
-MCTS,"RL Agent rewards, 10",14,11,Player 1
-MCTS,"RL Agent rewards, 100",21,4,Player 1
-MCTS,"RL Agent rewards, 10",24,1,Player 1
-MCTS,"RL Agent rewards, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",10,15,Player 2
 MCTS,"RL Agent rewards, 100",6,19,Player 2
-MCTS,"RL Agent rewards, 10",6,19,Player 2
-MCTS,"RL Agent rewards, 100",7,18,Player 2
-MCTS,"RL Agent rewards, 10",16,9,Player 1
-MCTS,"RL Agent rewards, 100",22,3,Player 1
-MCTS,"RL Agent rewards, 10",6,19,Player 2
-MCTS,"RL Agent rewards, 100",16,9,Player 1
-MCTS,"RL Agent rewards, 10",18,7,Player 1
-MCTS,"RL Agent rewards, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",6,19,Player 2
-MCTS,"RL Agent rewards, 100",12,13,Player 2
-MCTS,"RL Agent rewards, 10",7,18,Player 2
-MCTS,"RL Agent rewards, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",23,2,Player 1
-MCTS,"RL Agent rewards, 100",20,5,Player 1
-MCTS,"RL Agent rewards, 10",23,2,Player 1
-MCTS,"RL Agent rewards, 100",7,18,Player 2
-MCTS,"RL Agent rewards, 10",24,1,Player 1
+MCTS,"RL Agent rewards, 10",3,22,Player 2
+MCTS,"RL Agent rewards, 100",18,7,Player 1
+MCTS,"RL Agent rewards, 10",21,4,Player 1
 MCTS,"RL Agent rewards, 100",9,16,Player 2
+MCTS,"RL Agent rewards, 10",23,2,Player 1
+MCTS,"RL Agent rewards, 100",20,5,Player 1
+MCTS,"RL Agent rewards, 10",13,12,Player 1
+MCTS,"RL Agent rewards, 100",8,17,Player 2
 MCTS,"RL Agent rewards, 10",21,4,Player 1
+MCTS,"RL Agent rewards, 100",18,7,Player 1
+MCTS,"RL Agent rewards, 10",7,18,Player 2
+MCTS,"RL Agent rewards, 100",17,8,Player 1
+MCTS,"RL Agent rewards, 10",9,16,Player 2
+MCTS,"RL Agent rewards, 100",14,11,Player 1
+MCTS,"RL Agent rewards, 10",19,6,Player 1
+MCTS,"RL Agent rewards, 100",7,18,Player 2
+MCTS,"RL Agent rewards, 10",3,22,Player 2
+MCTS,"RL Agent rewards, 100",12,13,Player 2
+MCTS,"RL Agent rewards, 10",7,18,Player 2
+MCTS,"RL Agent rewards, 100",14,11,Player 1
+MCTS,"RL Agent rewards, 10",13,12,Player 1
 MCTS,"RL Agent rewards, 100",13,12,Player 1
-MCTS,"RL Agent rewards, 10",6,19,Player 2
-MCTS,"RL Agent rewards, 100",12,13,Player 2
-MCTS,"RL Agent rewards, 10",24,1,Player 1
-MCTS,"RL Agent rewards, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",8,17,Player 2
-MCTS,"RL Agent rewards, 100",12,13,Player 2
-MCTS,"RL Agent rewards, 10",21,4,Player 1
-MCTS,"RL Agent rewards, 100",16,9,Player 1
 MCTS,"RL Agent rewards, 10",10,15,Player 2
-MCTS,"RL Agent rewards, 100",11,14,Player 2
-MCTS,"RL Agent rewards, 10",12,13,Player 2
-MCTS,"RL Agent rewards, 100",17,8,Player 1
-MCTS,"RL Agent rewards, 10",15,10,Player 1
-MCTS,"RL Agent rewards, 100",17,8,Player 1
-MCTS,"RL Agent rewards, 10",14,11,Player 1
-MCTS,"RL Agent rewards, 100",15,10,Player 1
+MCTS,"RL Agent rewards, 100",16,9,Player 1
+MCTS,"RL Agent rewards, 10",23,2,Player 1
+MCTS,"RL Agent rewards, 100",5,20,Player 2
 MCTS,"RL Agent rewards, 10",8,17,Player 2
+MCTS,"RL Agent rewards, 100",16,9,Player 1
+MCTS,"RL Agent rewards, 10",17,8,Player 1
+MCTS,"RL Agent rewards, 100",15,10,Player 1
+MCTS,"RL Agent rewards, 10",17,8,Player 1
+MCTS,"RL Agent rewards, 100",18,7,Player 1
+MCTS,"RL Agent rewards, 10",23,2,Player 1
+MCTS,"RL Agent rewards, 100",5,20,Player 2
+MCTS,"RL Agent rewards, 10",16,9,Player 1
+MCTS,"RL Agent rewards, 100",15,10,Player 1
+MCTS,"RL Agent rewards, 10",20,5,Player 1
+MCTS,"RL Agent rewards, 100",4,21,Player 2
+MCTS,"RL Agent rewards, 10",9,16,Player 2
 MCTS,"RL Agent rewards, 100",6,19,Player 2
+MCTS,"RL Agent rewards, 10",11,14,Player 2
+MCTS,"RL Agent rewards, 100",4,21,Player 2
+MCTS,"RL Agent rewards, 10",12,13,Player 2
+MCTS,"RL Agent rewards, 100",10,15,Player 2
+MCTS,"RL Agent rewards, 10",9,16,Player 2
+MCTS,"RL Agent rewards, 100",12,13,Player 2
+MCTS,"RL Agent rewards, 10",7,18,Player 2
+MCTS,"RL Agent rewards, 100",20,5,Player 1
+MCTS,"RL Agent rewards, 10",15,10,Player 1
+MCTS,"RL Agent rewards, 100",16,9,Player 1
+MCTS,"RL Agent rewards, 10",12,13,Player 2
+MCTS,"RL Agent rewards, 100",5,20,Player 2
+MCTS,"RL Agent rewards, 10",7,18,Player 2
+MCTS,"RL Agent rewards, 100",16,9,Player 1
+MCTS,"RL Agent rewards, 10",3,22,Player 2
+MCTS,"RL Agent rewards, 100",21,4,Player 1
+MCTS,"RL Agent rewards, 10",13,12,Player 1
+MCTS,"RL Agent rewards, 100",7,18,Player 2
+MCTS,"RL Agent rewards, 10",8,17,Player 2
+MCTS,"RL Agent rewards, 100",7,18,Player 2
+MCTS,"RL Agent rewards, 10",22,3,Player 1
+MCTS,"RL Agent rewards, 100",7,18,Player 2
+MCTS,"RL Agent rewards, 10",7,18,Player 2
+MCTS,"RL Agent rewards, 100",4,21,Player 2
+MCTS,"RL Agent rewards, 10",20,5,Player 1
+MCTS,"RL Agent rewards, 100",17,8,Player 1
+MCTS,"RL Agent rewards, 10",16,9,Player 1
+MCTS,"RL Agent rewards, 100",10,15,Player 2
+MCTS,"RL Agent rewards, 10",5,20,Player 2
+MCTS,"RL Agent rewards, 100",17,8,Player 1
+MCTS,"RL Agent rewards, 10",4,21,Player 2
+MCTS,"RL Agent rewards, 100",17,8,Player 1
+MCTS,"RL Agent rewards, 10",12,13,Player 2
+MCTS,"RL Agent rewards, 100",18,7,Player 1
+MCTS,"RL Agent rewards, 10",10,15,Player 2
+MCTS,"RL Agent rewards, 100",5,20,Player 2
+MCTS,"RL Agent rewards, 10",21,4,Player 1
+MCTS,"RL Agent rewards, 100",6,19,Player 2
+MCTS,"RL Agent rewards, 10",24,1,Player 1
+MCTS,"RL Agent rewards, 100",10,15,Player 2
+MCTS,"RL Agent rewards, 10",11,14,Player 2
+MCTS,"RL Agent rewards, 100",11,14,Player 2
+MCTS,"RL Agent rewards, 10",10,15,Player 2
+MCTS,"RL Agent rewards, 100",19,6,Player 1
+MCTS,"RL Agent rewards, 10",16,9,Player 1
+MCTS,"RL Agent rewards, 100",12,13,Player 2
+MCTS,"RL Agent rewards, 10",18,7,Player 1
+MCTS,"RL Agent rewards, 100",20,5,Player 1
+MCTS,"RL Agent rewards, 10",4,21,Player 2
+MCTS,"RL Agent rewards, 100",24,1,Player 1
+MCTS,"RL Agent rewards, 10",9,16,Player 2
+MCTS,"RL Agent rewards, 100",10,15,Player 2
+MCTS,"RL Agent rewards, 10",5,20,Player 2
+MCTS,"RL Agent rewards, 100",13,12,Player 1
+MCTS,"RL Agent rewards, 10",7,18,Player 2
+MCTS,"RL Agent rewards, 100",6,19,Player 2
+MCTS,"RL Agent rewards, 10",22,3,Player 1
+MCTS,"RL Agent rewards, 100",16,9,Player 1
 MCTS,"RL Agent rewards, 10",4,21,Player 2
 MCTS,"RL Agent rewards, 100",16,9,Player 1
-MCTS,"RL Agent rewards, 10",8,17,Player 2
-MCTS,"RL Agent rewards, 100",4,21,Player 2
-MCTS,"RL Agent rewards, 10",18,7,Player 1
-MCTS,"RL Agent rewards, 100",4,21,Player 2
-MCTS,"RL Agent rewards, 10",18,7,Player 1
-MCTS,"RL Agent rewards, 100",8,17,Player 2
-MCTS,"RL Agent rewards, 10",6,19,Player 2
-MCTS,"RL Agent rewards, 100",13,12,Player 1
-MCTS,"RL Agent rewards, 10",2,23,Player 2
-MCTS,"RL Agent rewards, 100",14,11,Player 1
-MCTS,"RL Agent rewards, 10",20,5,Player 1
-MCTS,"RL Agent rewards, 100",22,3,Player 1
 MCTS,"RL Agent rewards, 10",10,15,Player 2
-MCTS,"RL Agent rewards, 100",11,14,Player 2
+MCTS,"RL Agent rewards, 100",6,19,Player 2
+MCTS,"RL Agent rewards, 10",9,16,Player 2
+MCTS,"RL Agent rewards, 100",6,19,Player 2
+MCTS,"RL Agent rewards, 10",13,12,Player 1
+MCTS,"RL Agent rewards, 100",7,18,Player 2
+MCTS,"RL Agent rewards, 10",5,20,Player 2
+MCTS,"RL Agent rewards, 100",9,16,Player 2
+MCTS,"RL Agent rewards, 10",24,1,Player 1
+MCTS,"RL Agent rewards, 100",6,19,Player 2
+MCTS,"RL Agent rewards, 10",19,6,Player 1
+MCTS,"RL Agent rewards, 100",19,6,Player 1
+MCTS,"RL Agent rewards, 10",16,9,Player 1
+MCTS,"RL Agent rewards, 100",18,7,Player 1
+MCTS,"RL Agent rewards, 10",22,3,Player 1
+MCTS,"RL Agent rewards, 100",15,10,Player 1
+MCTS,"RL Agent rewards, 10",5,20,Player 2
+MCTS,"RL Agent rewards, 100",2,23,Player 2
+MCTS,"RL Agent rewards, 10",8,17,Player 2
+MCTS,"RL Agent rewards, 100",7,18,Player 2
+MCTS,"RL Agent rewards, 10",24,1,Player 1
+MCTS,"RL Agent rewards, 100",20,5,Player 1
+MCTS,"RL Agent rewards, 10",9,16,Player 2
+MCTS,"RL Agent rewards, 100",6,19,Player 2
+MCTS,"RL Agent rewards, 10",15,10,Player 1
+MCTS,"RL Agent rewards, 100",5,20,Player 2
+MCTS,"RL Agent rewards, 10",14,11,Player 1
+MCTS,"RL Agent rewards, 100",16,9,Player 1
+MCTS,"RL Agent rewards, 10",16,9,Player 1
+MCTS,"RL Agent rewards, 100",12,13,Player 2
+MCTS,"RL Agent rewards, 10",10,15,Player 2
+MCTS,"RL Agent rewards, 100",19,6,Player 1
+MCTS,"RL Agent rewards, 10",22,3,Player 1
+MCTS,"RL Agent rewards, 100",16,9,Player 1
+MCTS,"RL Agent rewards, 10",10,15,Player 2
+MCTS,"RL Agent rewards, 100",5,20,Player 2
+MCTS,"RL Agent rewards, 10",1,24,Player 2
+MCTS,"RL Agent rewards, 100",18,7,Player 1
+MCTS,"RL Agent rewards, 10",23,2,Player 1
+MCTS,"RL Agent rewards, 100",7,18,Player 2
+MCTS,"RL Agent rewards, 10",10,15,Player 2
+MCTS,"RL Agent rewards, 100",8,17,Player 2
+MCTS,"RL Agent rewards, 10",21,4,Player 1
+MCTS,"RL Agent rewards, 100",18,7,Player 1
