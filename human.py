@@ -61,6 +61,6 @@ class Human():
                     else:
                         pos = pygame.mouse.get_pos()
                         action = self.mouse_click_to_action(pos)
-                        if (action and action in 
+                        if (action in 
                             self.env.get_valid_actions()):
                             return action
